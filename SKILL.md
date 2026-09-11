@@ -21,12 +21,11 @@ references:
   - components/feedback
   - patterns/lists
   - patterns/forms
-disable-model-invocation: true
 ---
 
 # IKHLAS App UI Design System
 
-Dual-platform skill for **Flutter (mobile)** and **Next.js (web)**. Same design language, same tokens.
+Internal AI agent skill for **Flutter (mobile)** and **Next.js (web)**. Same design language, same tokens. Load `SKILL.md` at session start or when the user names this skill explicitly.
 
 ## When to load
 
@@ -40,7 +39,7 @@ Load when the user mentions:
 
 1. Identify platform: **Flutter** → [references/flutter.md](references/flutter.md); **Next.js** → [references/nextjs.md](references/nextjs.md)
 2. Resolve tokens from [references/tokens.md](references/tokens.md) — never use magic numbers
-3. If a Figma URL is provided, load `figma-design-to-code` skill, then call `get_design_context`
+3. If a Figma URL is provided, call Figma MCP `get_design_context` on the target node (read [references/figma-source.md](references/figma-source.md))
 4. Reuse existing project components before creating new ones
 5. Validate against [playbook.md](playbook.md) audit checklist
 
@@ -70,7 +69,7 @@ Full node map: [references/figma-source.md](references/figma-source.md)
 ### Gate protocol
 
 1. Parse URL → `fileKey` + `nodeId` (convert `-` to `:`)
-2. Call `get_design_context` with `skillNames: figma-design-to-code`
+2. Call Figma MCP `get_design_context` on the parsed nodeId
 3. Map output to platform tokens (not raw Tailwind from Figma export)
 4. Reuse library components where they exist in the codebase
 

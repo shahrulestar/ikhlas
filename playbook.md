@@ -6,7 +6,7 @@ Task recipes for agents using the ikhlas-app-ui skill.
 
 ### Prerequisites
 
-- Load `figma-design-to-code` skill before calling `get_design_context`
+- Call Figma MCP `get_design_context` on the target node before writing code
 - Confirm platform: Flutter or Next.js
 
 ### Steps
@@ -107,9 +107,11 @@ When Figma exports raw hex, cross-check [references/colors.md](references/colors
 
 ---
 
-## When to load figma-design-to-code
+## Figma design-to-code rules
 
-**Always** before `get_design_context` when implementing Figma designs as code. That skill defines:
-- Treat output as reference, not paste-ready code
-- Honor token hints over raw hex
-- Asset fidelity rules for icons/images
+**Always** call `get_design_context` before implementing a Figma node as code:
+
+- Treat MCP output as reference, not paste-ready code
+- Map to platform tokens — honor token hints over raw hex from export
+- Preserve icon/image assets from Figma exports; do not redraw or omit
+- Adapt to Flutter or Next.js per [references/flutter.md](references/flutter.md) / [references/nextjs.md](references/nextjs.md)

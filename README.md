@@ -1,6 +1,6 @@
-# IKHLAS App UI — Cursor Agent Skill
+# IKHLAS App UI — AI Agent Skill
 
-A complete [Cursor Agent Skill](https://cursor.com/docs/agent/skills) for the **IKHLAS App UI Styles** design system. It teaches AI agents how to implement IKHLAS screens consistently across **Flutter (mobile)** and **Next.js (web)** using the same design tokens extracted from Figma.
+**Internal use only.** A structured skill package for AI coding agents working on the **IKHLAS App UI Styles** design system. It teaches agents how to implement IKHLAS screens consistently across **Flutter (mobile)** and **Next.js (web)** using shared design tokens extracted from Figma.
 
 **Figma source (read-only):** [IKHLAS App UI Styles](https://www.figma.com/design/Yi0hAYFAqMEDEvjhqA020v/IKHLAS-App-UI-Styles)
 
@@ -8,52 +8,69 @@ A complete [Cursor Agent Skill](https://cursor.com/docs/agent/skills) for the **
 
 ## What this repo is
 
-This repository is the **canonical, version-controlled copy** of the `ikhlas-app-ui` skill. It contains:
+This repository is the **canonical, version-controlled copy** of the `ikhlas-app-ui` agent skill. It is not tied to a single IDE or agent product — any AI agent that can load markdown instructions and reference files can use it.
 
-- Agent orchestration (`SKILL.md`)
-- Brand and UX principles (`design.md`)
-- Task playbooks for implement / audit / refresh (`playbook.md`)
-- Full token reference with Flutter + Next.js mappings (`references/`)
-- Code examples (`examples/`)
+Contents:
 
-The skill is derived entirely from the Figma library — no app codebase is required to use it.
+| File / folder | Purpose |
+|---------------|---------|
+| `SKILL.md` | Main agent instructions — load this first |
+| `design.md` | Brand principles, UX rules, do/don't |
+| `playbook.md` | Task recipes: implement, audit, token refresh |
+| `references/` | Tokens, colors, typography, platform guides, components |
+| `examples/` | Before/after Figma → code samples |
+
+The skill is derived entirely from the Figma library. No app codebase is required to use it.
 
 ---
 
-## Quick install
+## Installation
 
-### Option A — Personal skill (recommended)
+Clone the repo to a location your agent can read. The exact path depends on your agent setup.
 
-Clone into your Cursor skills directory:
-
-```bash
-git clone https://github.com/shahrulestar/ikhlas.git ~/.cursor/skills/ikhlas-app-ui
-```
-
-### Option B — Project skill
-
-Add as a submodule or copy into a project:
+### Option A — Standalone clone
 
 ```bash
-mkdir -p .cursor/skills
-git clone https://github.com/shahrulestar/ikhlas.git .cursor/skills/ikhlas-app-ui
+git clone https://github.com/shahrulestar/ikhlas.git
 ```
 
-### Option C — Symlink from this repo
+Point your agent at the repo root (or at `SKILL.md`) when starting a session.
 
-If you keep a local clone elsewhere:
+### Option B — Project-local skill
+
+Add inside a project so the whole team shares the same version:
 
 ```bash
-ln -s /path/to/ikhlas ~/.cursor/skills/ikhlas-app-ui
+git submodule add https://github.com/shahrulestar/ikhlas.git skills/ikhlas-app-ui
 ```
 
-After install, restart Cursor or start a new agent chat so the skill is discoverable.
+Or copy the folder:
+
+```bash
+git clone https://github.com/shahrulestar/ikhlas.git skills/ikhlas-app-ui
+```
+
+### Option C — Agent skills directory
+
+If your agent runtime supports a skills/plugins folder, clone or symlink there:
+
+```bash
+git clone https://github.com/shahrulestar/ikhlas.git /path/to/your/agent/skills/ikhlas-app-ui
+```
+
+Replace `/path/to/your/agent/skills/` with whatever your tool expects (e.g. a personal skills directory, project `.agents/skills/`, or a custom config path).
+
+### Option D — Manual context
+
+For agents without skill discovery, attach or paste `SKILL.md` at the start of a session, then pull in reference files as needed (`references/tokens.md`, `references/colors.md`, etc.).
+
+After install, start a **new agent session** so the skill is loaded fresh.
 
 ---
 
 ## How to invoke
 
-The skill uses `disable-model-invocation: true`, so **name it explicitly** in your prompt:
+**Name the skill explicitly** in your prompt — do not assume auto-discovery:
 
 ```
 Use the ikhlas-app-ui skill to implement this action_card in Flutter
@@ -63,9 +80,9 @@ Use the ikhlas-app-ui skill to implement this action_card in Flutter
 Use ikhlas-app-ui to build this IKHLAS web header in Next.js from Figma
 ```
 
-Trigger terms the agent recognizes: **IKHLAS**, **IKH**, **IDS**, **IKHLAS App UI Styles**, or a Figma URL from the library.
+**Trigger terms:** IKHLAS, IKH, IDS, IKHLAS App UI Styles, or a Figma URL from the library.
 
-When implementing from a Figma URL, also load the `figma-design-to-code` skill before calling `get_design_context`.
+**Figma workflows:** When implementing from a Figma URL, read the target node via Figma MCP (`get_design_context`, `get_variable_defs`, `search_design_system`) before writing code. See [references/figma-source.md](references/figma-source.md).
 
 ---
 
@@ -74,7 +91,7 @@ When implementing from a Figma URL, also load the `figma-design-to-code` skill b
 ```
 ikhlas/
 ├── README.md                 ← You are here
-├── SKILL.md                  ← Main agent instructions (<500 lines)
+├── SKILL.md                  ← Main agent entry point
 ├── design.md                 ← Brand principles, do/don't, accessibility
 ├── playbook.md               ← Implement screen, UI audit, token refresh
 ├── examples/
@@ -86,18 +103,18 @@ ikhlas/
     ├── typography.md         ← DM Sans type scale
     ├── spacing.md            ← 4px grid (space2–space80)
     ├── radius-shadows.md     ← 12px card default, 4px info banner
-    ├── motion.md             ← Motion defaults (no Figma motion tokens yet)
+    ├── motion.md             ← Motion defaults
     ├── flutter.md            ← ThemeExtension, spacing, widgets
     ├── nextjs.md             ← CSS vars, Tailwind v4 @theme, fonts
     ├── components/
-    │   ├── buttons.md        ← button, button_link
-    │   ├── cards.md          ← action_card, user_greeting_card
-    │   ├── navigation.md     ← header, logo, tab bar
-    │   └── feedback.md       ← info, notice
+    │   ├── buttons.md
+    │   ├── cards.md
+    │   ├── navigation.md
+    │   └── feedback.md
     └── patterns/
-        ├── lists.md          ← Carousels, settings lists
-        ├── forms.md          ← Form tokens (input not in library)
-        └── empty-states.md   ← Token-based empty state pattern
+        ├── lists.md
+        ├── forms.md
+        └── empty-states.md
 ```
 
 ---
@@ -197,13 +214,8 @@ Full scale: [references/typography.md](references/typography.md)
 ## Flutter quick start
 
 ```dart
-// Spacing
 padding: EdgeInsets.all(IkhlasSpacing.space16)
-
-// Color
 color: IkhlasColors.primaryTeal
-
-// Typography
 style: IkhlasTypography.h3
 ```
 
@@ -228,9 +240,9 @@ See [references/nextjs.md](references/nextjs.md) for CSS vars, Tailwind v4 `@the
 
 | Task | Guide |
 |------|-------|
-| Implement screen from Figma | [playbook.md](playbook.md) → Implement screen |
-| UI consistency audit | [playbook.md](playbook.md) → UI audit checklist |
-| Refresh tokens after Figma update | [playbook.md](playbook.md) → Token refresh |
+| Implement screen from Figma | [playbook.md](playbook.md) |
+| UI consistency audit | [playbook.md](playbook.md) |
+| Refresh tokens after Figma update | [playbook.md](playbook.md) |
 | Brand / UX rules | [design.md](design.md) |
 
 ---
@@ -242,7 +254,7 @@ When the Figma library changes:
 1. Re-run Figma MCP extraction (`search_design_system`, `get_variable_defs` on bound instances)
 2. Update `references/tokens.md` and affected reference files
 3. Commit and push to this repo
-4. Pull or re-clone into `~/.cursor/skills/ikhlas-app-ui`
+4. Pull or re-clone wherever your team installs the skill
 
 **Do not edit Figma from the skill.** Read-only via MCP.
 
@@ -264,9 +276,13 @@ Input `component_set` is not in this library — check the Customer App file (`r
 
 ---
 
-## License
+## Internal usage
 
-Internal IKHLAS design system documentation. Figma assets remain property of IKHLAS / respective owners.
+This skill is maintained for **internal IKHLAS product and engineering use**. It is not a public design system site or open-source UI kit.
+
+- Keep the repo access limited to your team
+- Do not redistribute Figma assets outside approved channels
+- Token values should match the live Figma library — report drift to design ops
 
 ---
 
