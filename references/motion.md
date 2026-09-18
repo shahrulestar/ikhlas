@@ -1,6 +1,6 @@
 # Motion
 
-No motion/animation tokens were found in the IKHLAS App UI Styles Figma library via MCP search.
+No motion/animation tokens are documented in the IKHLAS App UI design system yet.
 
 ## Defaults (when animation is needed)
 
@@ -26,4 +26,4 @@ const kIkhlasAnimationDuration = Duration(milliseconds: 200);
 
 ## Refresh
 
-If Figma adds motion tokens, re-run `search_design_system` for "duration" or "easing" and update this file.
+If motion tokens are added to the design system, document duration and easing values here.

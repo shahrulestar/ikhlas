@@ -2,25 +2,16 @@
 
 Loading placeholders that mirror the layout of loaded content. Used while data is fetching.
 
-## Figma source
+Primary reference implementation: **Events Calendar** loading states.
 
-| Field | Value |
-|-------|-------|
-| File | WIP - IKH Customer App 2.0 |
-| fileKey | `r1ODKpGXGqwwDlOinO00ge` |
-| Section | Skelaton (`11649:291687`) |
-| Built | 2026-09-15 — Events Calendar loading states |
+### Frame variants
 
-[Figma link](https://www.figma.com/design/r1ODKpGXGqwwDlOinO00ge/WIP---IKH-Customer-App-2.0?node-id=11649-291687)
-
-### Frame node IDs
-
-| Frame | nodeId | Description |
-|-------|--------|-------------|
-| Event list card | `11649:291676` | Single event row skeleton |
-| Month Container | `11649:291688` | Month label + 2 event cards |
-| Calendar with today state | `11649:291727` | Full screen — empty day selected |
-| Calendar with focus state | `11649:292012` | Full screen — day selected + summary list |
+| Frame | Description |
+|-------|-------------|
+| Event list card | Single event row skeleton |
+| Month Container | Month label + 2 event cards |
+| Calendar with today state | Full screen — empty day selected |
+| Calendar with focus state | Full screen — day selected + summary list |
 
 ## Token spec
 
@@ -34,7 +25,7 @@ Loading placeholders that mirror the layout of loaded content. Used while data i
 
 **Rule:** All skeleton blocks use Grey 200 at 50% opacity. Do not use other greys or full-opacity fills.
 
-**Calendar cell rule:** Apply the skeleton fill directly to each date frame — no inner rectangles. Remove child content; the frame itself becomes the placeholder (see example `11649:291767`). All date frames must be **48×55** (fixed). Set grid `gridRowSizes` to `FIXED 55` for every row so no row collapses shorter than the others.
+**Calendar cell rule:** Apply the skeleton fill directly to each date frame — no inner rectangles. Remove child content; the frame itself becomes the placeholder. All date frames must be **48×55** (fixed). Set grid `gridRowSizes` to `FIXED 55` for every row so no row collapses shorter than the others.
 
 **Week header rule:** Same pattern as calendar cells — apply skeleton fill to each day-of-week frame (44×29, radius 4). Remove inner rectangles and text. Set Week grid row to `FIXED 29`.
 
@@ -90,19 +81,15 @@ Month Container (358, VERTICAL, gap 16)
 
 ## Calendar date cell component
 
-Reference spec from **Date Container** (`11794:17176`) on page *NEW Components Explanation*. Component set **Calendar** (`11794:17006`).
+| Variant | Date Box | Text | Indicators |
+|---------|----------|------|------------|
+| Default | 47.71×39, radius 4, no fill | Gregorian `#212124`, Hijri `#75767A` | 14px row, empty |
+| Today | Fill solid `#00B2A9` | White | 14px row, empty |
+| Focused | Fill `#00B2A9` @ 10% | Gregorian + Hijri `#212124` | Brand dots 6×6 |
 
-| Variant | nodeId | Date Box | Text | Indicators |
-|---------|--------|----------|------|------------|
-| State=Default | `11794:17007` | 47.71×39, radius 4, no fill | Gregorian `#212124`, Hijri `#75767A` | 14px row, empty |
-| State=Today | `11794:17018` | Fill solid `#00B2A9` | White | 14px row, empty |
-| State=Focused | `11794:17029` | Fill `#00B2A9` @ 10% | Gregorian + Hijri `#212124` | Brand dots 6×6 |
+**Cell structure:** Calendar cell 47.71×55 = Date Box (39px) + Indicators (14px). Radius 4 applies to **Date Box**, not the outer cell.
 
-**Cell structure:** `Calendar` instance 47.71×55 = `Date Box` (39px) + `Indicators` (14px). Radius 4 applies to **Date Box**, not the outer cell.
-
-**MVP Flow grids updated:** 9 grids each in `[EN] Phase 1 UI MVP Flow` (`11088:5731`) and `[MS] Phase 1 UI MVP Flow` (`11455:4078`) — ad-hoc `Frame` cells replaced with `Calendar` instances. Today marker: day **18** on `Calendar with today state`. Focused marker: day **18** on `Calendar with focus state`.
-
-**Event indicator dots:** Use component boolean toggles (`ikhlas 1`, `islamic 1`, `ikhlas 2`, `islamic 2`) — default **off**. Dots only on days with events. August grids: days **25** (2 dots), **26–28** (1 each). September drawer grids: days **6**, **24–26** (1 each). Today/Focused cells (day 18) keep state styling without dots unless that day has events. EN dots synced from paired MS grid; MS dots preserved from original frame data during migration.
+**Event indicator dots:** Default **off**. Dots only on days with events. Today/Focused cells keep state styling without dots unless that day has events.
 
 ## Calendar screen structure
 

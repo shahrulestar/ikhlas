@@ -121,6 +121,6 @@ ElevatedButton(
 ## Rules
 
 - Use `google_fonts` for DM Sans
-- Match Figma component names in widget class names
+- Match design system component names in widget class names
 - Screen padding: `EdgeInsets.symmetric(horizontal: IkhlasSpacing.space16)`
 - Default icon size: 24×24

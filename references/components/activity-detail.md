@@ -2,45 +2,7 @@
 
 Key-value section cards used on **Activity Detail** screens (Sadaqah, Zakat, Qurban, etc.).
 
-## Figma source
-
-| Field | Value |
-|-------|-------|
-| File | WIP - IKH Customer App 2.0 |
-| fileKey | `r1ODKpGXGqwwDlOinO00ge` |
-| Parent frame (Sadaqah) | Activity Details Sadaqah - CTA support (`11610:34050`) |
-| Sections container (Sadaqah) | `11610:34052` (`sections — Sadaqah (dummy)`) |
-| Parent frame (Zakat) | Activity Details (`11639:291235`) |
-| Sections container (Zakat) | `11734:292043` (`sections — Zakat (dummy)`) |
-| Zakat email receipt (field source) | `[Zakat] Payment Receipt Email` (`11717:24994`) |
-| Parent frame (Aqiqah) | Activity Details (`11755:17320`) |
-| Sections container (Aqiqah) | `11755:17334` (`sections — Aqiqah (dummy)`) |
-| Aqiqah email receipt (field source) | `[Aqiqah] Payment Receipt Email` (`11755:19410`) |
-| Parent frame (Fidyah) | Activity Details (`11759:20192`) |
-| Sections container (Fidyah) | `11759:20206` (`sections — Fidyah (dummy)`) |
-| Fidyah email receipt (field source) | `[Fidyah] Payment Receipt Email` (`11717:25121`) |
-| Sadaqah dummy variant | Built 2026-09-15 — 3 section cards with dummy data |
-| Zakat dummy variant | Built 2026-09-17 — 3 section cards aligned to email receipt |
-
-### Section node IDs (Sadaqah dummy)
-
-| Section | nodeId |
-|---------|--------|
-| Payment paid | `11614:681` |
-| Order information | `11614:701` |
-| Payment summary | `11614:733` |
-
-[Figma link — Sadaqah](https://www.figma.com/design/r1ODKpGXGqwwDlOinO00ge/WIP---IKH-Customer-App-2.0?node-id=11610-34052)
-
-### Section node IDs (Zakat dummy)
-
-| Section | nodeId |
-|---------|--------|
-| Payment paid | `11734:292044` |
-| Order information | `11734:292064` |
-| Payment summary | `11734:292102` |
-
-[Figma link — Zakat](https://www.figma.com/design/r1ODKpGXGqwwDlOinO00ge/WIP---IKH-Customer-App-2.0?node-id=11639-291235)
+Each product variant uses three section cards: **Payment paid**, **Order information**, and **Payment summary**. Field labels align to the product's payment receipt email template.
 
 ## Layout spec
 
@@ -62,14 +24,14 @@ Key-value section cards used on **Activity Detail** screens (Sadaqah, Zakat, Qur
 
 **Note:** Activity detail cards use **4px radius**, not the default 12px card radius.
 
-## Text styles (IKHLAS App UI Styles library)
+## Text styles
 
-| Role | Style name | Style key |
-|------|------------|-----------|
-| Section title | 14px Sub Body Text | `170b8475dc745467a3f23eb1030d75d6aeebbf2d` |
-| Row label | 16px Body Text | `5307034fc94cc63adf1efa3e2af5481e806b5824` |
-| Row value | 14px Sub Body Text | `170b8475dc745467a3f23eb1030d75d6aeebbf2d` |
-| Total row | 16px Body Text Medium | `3f44cc1716bf121033a13cb0c579ddaab507f357` |
+| Role | Style |
+|------|-------|
+| Section title | 14px Sub Body, Grey 600 |
+| Row label | 16px Body, Black |
+| Row value | 14px Sub Body, Grey 600, right-aligned |
+| Total row | 16px Body Medium, Black |
 
 ## Structure
 
@@ -85,7 +47,7 @@ sections (VERTICAL, gap 16, width 358)
             └── separator (1px grey200, inset 16) — omit on last row
 ```
 
-Sections are **manual frames** (not component instances). Reuse this structure when generating new activity variants via `use_figma`.
+Sections are **manual frames** (not component instances). Reuse this structure when building new product variants.
 
 ## Dummy data schema (Sadaqah)
 
@@ -112,7 +74,7 @@ interface ActivityDetailSection {
 
 ### Zakat example
 
-Field labels and dummy values aligned to `[Zakat] Payment Receipt Email` (`11717:24994`). **Customer Information** (Name, Email, AirAsia Member ID) is email-only — omitted on mobile (user is already authenticated in-app).
+Field labels and dummy values aligned to the Zakat payment receipt email. **Customer Information** (Name, Email, AirAsia Member ID) is email-only — omitted on mobile (user is already authenticated in-app).
 
 | Section | Rows |
 |---------|------|
@@ -124,7 +86,7 @@ Product logo on screen: **IKHLAS Zakat logo** (`Property 1=IKHLAS Zakat logo` on
 
 ### Aqiqah example
 
-Field labels and dummy values aligned to `[Aqiqah] Payment Receipt Email` (`11755:19410`). **Customer Information** is email-only — omitted on mobile.
+Field labels and dummy values aligned to the Aqiqah payment receipt email. **Customer Information** is email-only — omitted on mobile.
 
 | Section | Rows |
 |---------|------|
@@ -138,7 +100,7 @@ Entry context: post-receipt — user opens Activity Detail after payment email, 
 
 ### Fidyah example
 
-Field labels and dummy values aligned to `[Fidyah] Payment Receipt Email` (`11717:25121`). **Customer Information** is email-only — omitted on mobile.
+Field labels and dummy values aligned to the Fidyah payment receipt email. **Customer Information** is email-only — omitted on mobile.
 
 | Section | Rows |
 |---------|------|

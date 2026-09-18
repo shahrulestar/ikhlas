@@ -1,52 +1,52 @@
 # Color Tokens
 
-Fill styles from the IKHLAS library, with hex from `get_variable_defs` on bound instances (2026-09-11 re-extract).
+Semantic color palette for the IKHLAS App UI design system.
 
 ## Brand / Teal
 
-| Semantic name | Hex | Figma style | Source node | Usage |
-|---------------|-----|-------------|-------------|-------|
-| Primary Teal | `#007F7C` | Primary Teal | `1256:22296` | Links, button_link text, brand actions |
-| Dark Teal | `#00938F` | MMB colors/brand/Dark Teal | `1167:26190` | Filled primary CTA |
-| Secondary Teal | `#00B2A9` | Secondary Teal | `1256:22066` | Non-CTA / home header / logo accent |
-| Darker Teal | — | Darker Teal | (no bound instance on Issues page) | Clicked/pressed button |
-| Teal Link Alt | `#169D9A` | — | `1256:22082` | Greeting-card button_link |
-| Teal Surface | `#F0F9F9` | — | `1256:22296` | action_card background |
+| Semantic name | Hex | Style name | Usage |
+|---------------|-----|------------|-------|
+| Primary Teal | `#007F7C` | Primary Teal | Links, button_link text, brand actions |
+| Dark Teal | `#00938F` | Dark Teal | Filled primary CTA |
+| Secondary Teal | `#00B2A9` | Secondary Teal | Non-CTA / home header / logo accent |
+| Darker Teal | — | Darker Teal | Clicked/pressed button (hex TBD) |
+| Teal Link Alt | `#169D9A` | — | Greeting-card button_link |
+| Teal Surface | `#F0F9F9` | — | action_card background |
 
 Secondary Teal **is** the brand teal (`#00B2A9`). Do not treat `#00B2A9` as a separate undocumented color.
 
 ## Neutrals
 
-| Semantic name | Hex | Figma style | Source node | Usage |
-|---------------|-----|-------------|-------------|-------|
-| Black | `#212124` | Black / Neutral/Black | `1256:22296` | Headings, titles |
-| White | `#FFFFFF` | White / Basic/White | `1256:22313` | Surfaces |
-| Grey 800 | `#424242` | Grey 800 | `1256:22296` | Body on tinted backgrounds |
-| Grey 700 | `#616161` | Grey 700 | `1256:22082` | Secondary body |
-| Grey 600 | `#75767A` | Grey 600 | `1256:22313` | Inactive tab bar icons/labels |
-| Grey Dark | `#75767A` | Neutral/Grey Dark | `1167:26501` | Web nav items — **same hex as Grey 600** |
-| Grey 90 | `#4C4C50` | Primary/Grey/90, Neutral/Grey Darker | `1167:26132` | Link-style button text, homepage body |
-| Grey Light | `#D9DBE0` | Neutral/Grey Light | `1167:26501` | Web header separators |
-| Grey 200 | `#EAEAEA` | Grey 200 | `1256:22313` | Mobile tab top border, list separators |
-| Grey 50 | `#F8F8F8` | Grey 50 (style exists; fill unbound) | `1503:19843` notice bg | Card / notice surface |
-| Grey 300 | — | Grey 300 | (no disabled-button instance found) | Disabled button fill |
+| Semantic name | Hex | Style name | Usage |
+|---------------|-----|------------|-------|
+| Black | `#212124` | Black | Headings, titles |
+| White | `#FFFFFF` | White | Surfaces |
+| Grey 800 | `#424242` | Grey 800 | Body on tinted backgrounds |
+| Grey 700 | `#616161` | Grey 700 | Secondary body |
+| Grey 600 | `#75767A` | Grey 600 | Inactive tab bar icons/labels |
+| Grey Dark | `#75767A` | Grey Dark | Web nav items — **same hex as Grey 600** |
+| Grey 90 | `#4C4C50` | Grey 90 | Link-style button text, homepage body |
+| Grey Light | `#D9DBE0` | Grey Light | Web header separators |
+| Grey 200 | `#EAEAEA` | Grey 200 | Mobile tab top border, list separators |
+| Grey 50 | `#F8F8F8` | Grey 50 | Card / notice surface |
+| Grey 300 | — | Grey 300 | Disabled button fill (hex TBD) |
 
 Grey Light (`#D9DBE0`) and Grey 200 (`#EAEAEA`) are **different**. Use Grey 200 for mobile borders.
 
 ## Blue (informational)
 
-| Semantic name | Hex | Figma style | Source node | Usage |
-|---------------|-----|-------------|-------------|-------|
-| Tertiary Blue | `#2F73D2` | Tertiary/Blue | `377:10952` | Info banner border |
-| Tertiary Blue Hover | `#2765BD` | Tertiary/Blue Hover | `377:10952` | Info banner text |
-| Lighter Blue | `#EAF1FB` | Lighter/Blue | `377:10952` | Info banner background |
+| Semantic name | Hex | Style name | Usage |
+|---------------|-----|------------|-------|
+| Tertiary Blue | `#2F73D2` | Tertiary/Blue | Info banner border |
+| Tertiary Blue Hover | `#2765BD` | Tertiary/Blue Hover | Info banner text |
+| Lighter Blue | `#EAF1FB` | Lighter/Blue | Info banner background |
 
 ## Semantic / status
 
-| Semantic name | Hex | Figma style | Source node | Usage |
-|---------------|-----|-------------|-------------|-------|
-| Red | `#E94335` | Branding/Red (library also has fill **Red** “alert”) | `1167:26114` | Errors, alerts |
-| Dark Gold | — | Dark Gold | (no bound instance) | Secondary link |
+| Semantic name | Hex | Style name | Usage |
+|---------------|-----|------------|-------|
+| Red | `#E94335` | Red | Errors, alerts |
+| Dark Gold | — | Dark Gold | Secondary link (hex TBD) |
 
 ## Adjacent styles (do not mix into IKH greys)
 
@@ -110,14 +110,13 @@ abstract class IkhlasColors {
 }
 ```
 
-## Still unresolved (select in Figma, then `get_variable_defs`)
+## Tokens pending hex confirmation
 
-| Style | Why missing |
-|-------|-------------|
-| Darker Teal | Pressed CTA — no clicked-state instance on Issues page |
-| Grey 300 | Disabled button — no disabled variant instance found |
-| Dark Gold | Secondary link — no instance found |
-| Red fill style | Hex taken from **Branding/Red**; confirm it matches fill **Red** |
+| Style | Intended use |
+|-------|--------------|
+| Darker Teal | Pressed/clicked CTA |
+| Grey 300 | Disabled button |
+| Dark Gold | Secondary link |
 
 ## Rules
 

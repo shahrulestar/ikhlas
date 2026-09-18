@@ -1,8 +1,6 @@
 # IKHLAS App UI — AI Agent Skill
 
-**Internal use only.** A structured skill package for AI coding agents working on the **IKHLAS App UI Styles** design system. It teaches agents how to implement IKHLAS screens consistently across **Flutter (mobile)** and **Next.js (web)** using shared design tokens extracted from Figma.
-
-**Figma source (read-only):** [IKHLAS App UI Styles](https://www.figma.com/design/Yi0hAYFAqMEDEvjhqA020v/IKHLAS-App-UI-Styles)
+A structured skill package for AI coding agents working on the **IKHLAS App UI** design system. It teaches agents how to implement IKHLAS screens consistently across **Flutter (mobile)** and **Next.js (web)** using shared design tokens, component specs, and platform guides.
 
 ---
 
@@ -10,17 +8,70 @@
 
 This repository is the **canonical, version-controlled copy** of the `ikhlas-app-ui` agent skill. It is not tied to a single IDE or agent product — any AI agent that can load markdown instructions and reference files can use it.
 
-Contents:
-
 | File / folder | Purpose |
 |---------------|---------|
-| `SKILL.md` | Main agent instructions — load this first |
-| `design.md` | Brand principles, UX rules, do/don't |
-| `playbook.md` | Task recipes: implement, audit, token refresh |
-| `references/` | Tokens, colors, typography, platform guides, components |
-| `examples/` | Before/after Figma → code samples |
+| [SKILL.md](SKILL.md) | Main agent instructions — load this first |
+| [design.md](design.md) | Brand principles, UX rules, do/don't |
+| [playbook.md](playbook.md) | Task recipes: implement screens, audit UI, token refresh |
+| [references/](references/) | Tokens, colors, typography, platform guides, components |
+| [examples/](examples/) | Before/after design export → code samples |
 
-The skill is derived entirely from the Figma library. No app codebase is required to use it.
+No app codebase is required to use this skill. All token values and component specs are documented in the reference files.
+
+---
+
+## Documentation index
+
+### Core guides
+
+| Doc | Description |
+|-----|-------------|
+| [SKILL.md](SKILL.md) | Entry point — when to load, quick start, component lookup |
+| [design.md](design.md) | Brand identity, visual language, accessibility |
+| [playbook.md](playbook.md) | Implement screens, UI audit checklist, token resolution |
+
+### Design tokens
+
+| Doc | Description |
+|-----|-------------|
+| [references/tokens.md](references/tokens.md) | Master token index (Flutter + Next.js) |
+| [references/colors.md](references/colors.md) | Full color palette with hex and semantic names |
+| [references/typography.md](references/typography.md) | DM Sans type scale (H1–Caption) |
+| [references/spacing.md](references/spacing.md) | 4px grid (`space2`–`space80`) |
+| [references/radius-shadows.md](references/radius-shadows.md) | 12px card default, 4px info banner |
+| [references/motion.md](references/motion.md) | Motion defaults |
+
+### Platform guides
+
+| Platform | Stack | Reference |
+|----------|-------|-----------|
+| Mobile app | Flutter | [references/flutter.md](references/flutter.md) |
+| Web | Next.js + Tailwind v4 | [references/nextjs.md](references/nextjs.md) |
+
+### Components
+
+| Component | Reference |
+|-----------|-----------|
+| button, button_link | [references/components/buttons.md](references/components/buttons.md) |
+| action_card, user_greeting_card | [references/components/cards.md](references/components/cards.md) |
+| activity_detail sections | [references/components/activity-detail.md](references/components/activity-detail.md) |
+| skeleton UI | [references/components/skeleton-ui.md](references/components/skeleton-ui.md) |
+| header, IKHLAS Logo | [references/components/navigation.md](references/components/navigation.md) |
+| info, notice | [references/components/feedback.md](references/components/feedback.md) |
+
+### Patterns
+
+| Pattern | Reference |
+|---------|-----------|
+| Lists & separators | [references/patterns/lists.md](references/patterns/lists.md) |
+| Forms | [references/patterns/forms.md](references/patterns/forms.md) |
+| Empty states | [references/patterns/empty-states.md](references/patterns/empty-states.md) |
+
+### Examples
+
+| Doc | Description |
+|-----|-------------|
+| [examples/implementations.md](examples/implementations.md) | Before/after token mapping for common components |
 
 ---
 
@@ -62,7 +113,7 @@ Replace `/path/to/your/agent/skills/` with whatever your tool expects (e.g. a pe
 
 ### Option D — Manual context
 
-For agents without skill discovery, attach or paste `SKILL.md` at the start of a session, then pull in reference files as needed (`references/tokens.md`, `references/colors.md`, etc.).
+For agents without skill discovery, attach or paste `SKILL.md` at the start of a session, then pull in reference files as needed.
 
 After install, start a **new agent session** so the skill is loaded fresh.
 
@@ -77,75 +128,16 @@ Use the ikhlas-app-ui skill to implement this action_card in Flutter
 ```
 
 ```
-Use ikhlas-app-ui to build this IKHLAS web header in Next.js from Figma
+Use ikhlas-app-ui to build this IKHLAS web header in Next.js
 ```
 
-**Trigger terms:** IKHLAS, IKH, IDS, IKHLAS App UI Styles, or a Figma URL from the library.
-
-**Figma workflows:** When implementing from a Figma URL, read the target node via Figma MCP (`get_design_context`, `get_variable_defs`, `search_design_system`) before writing code. See [references/figma-source.md](references/figma-source.md).
-
----
-
-## Repository structure
-
-```
-ikhlas/
-├── README.md                 ← You are here
-├── SKILL.md                  ← Main agent entry point
-├── design.md                 ← Brand principles, do/don't, accessibility
-├── playbook.md               ← Implement screen, UI audit, token refresh
-├── examples/
-│   └── implementations.md    ← Before/after Figma → code samples
-└── references/
-    ├── figma-source.md       ← File keys, node IDs, MCP guide
-    ├── tokens.md             ← Master token index (Flutter + Next.js)
-    ├── colors.md             ← Full color palette with hex
-    ├── typography.md         ← DM Sans type scale
-    ├── spacing.md            ← 4px grid (space2–space80)
-    ├── radius-shadows.md     ← 12px card default, 4px info banner
-    ├── motion.md             ← Motion defaults
-    ├── flutter.md            ← ThemeExtension, spacing, widgets
-    ├── nextjs.md             ← CSS vars, Tailwind v4 @theme, fonts
-    ├── components/
-    │   ├── buttons.md
-    │   ├── cards.md
-    │   ├── navigation.md
-    │   └── feedback.md
-    └── patterns/
-        ├── lists.md
-        ├── forms.md
-        └── empty-states.md
-```
+**Trigger terms:** IKHLAS, IKH, IDS, Ikhlas App, ikhlas.com web, IKHLAS App UI Styles.
 
 ---
 
 ## Design system at a glance
 
-### Platforms
-
-| Platform | Stack | Reference |
-|----------|-------|-----------|
-| Mobile app | Flutter | [references/flutter.md](references/flutter.md) |
-| Web | Next.js + Tailwind v4 | [references/nextjs.md](references/nextjs.md) |
-
 Both platforms share the same semantic tokens. Layout differs (390px mobile vs ~1024px web content column).
-
-### Figma library
-
-| Field | Value |
-|-------|-------|
-| Name | IKHLAS App UI Styles |
-| fileKey | `Yi0hAYFAqMEDEvjhqA020v` |
-| libraryKey | `lk-d22f4ea0ae582208e0db86e002a131dc653b259a72c1be5a92b380efd7fe05cea4c5f713019724c5ccd8fa9c58c91580803549e0cab71a78a5d647ac0715e765` |
-| Type | Figma Library (components + styles) |
-
-Related product files:
-
-| File | fileKey | Role |
-|------|---------|------|
-| WIP - IKH Customer App 2.0 | `r1ODKpGXGqwwDlOinO00ge` | Full app screens |
-| HANDSHAKE - IKH Customer App 2.0 | `jE0BN6ZlWnn8kuHVTeCsZh` | Handoff screens |
-| IKHLAS Design System (IDS) Research | `JZPpBdc5EyIgMJNsw48vEc` | FigJam research |
 
 ### Brand colors
 
@@ -192,22 +184,8 @@ Full scale: [references/typography.md](references/typography.md)
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| radius-sm | 4px | Info banners |
+| radius-sm | 4px | Info banners, activity detail cards |
 | radius-md | 12px | Cards, CTAs (IKHLAS-3640) |
-
-### Components in library
-
-| Component | Type | Reference |
-|-----------|------|-----------|
-| button | component_set | [components/buttons.md](references/components/buttons.md) |
-| button_link | component_set | [components/buttons.md](references/components/buttons.md) |
-| action_card | component_set | [components/cards.md](references/components/cards.md) |
-| user_greeting_card | component_set | [components/cards.md](references/components/cards.md) |
-| info | component | [components/feedback.md](references/components/feedback.md) |
-| notice | component_set | [components/feedback.md](references/components/feedback.md) |
-| header | instance | [components/navigation.md](references/components/navigation.md) |
-| IKHLAS Logo | component_set | [components/navigation.md](references/components/navigation.md) |
-| icon + label | component_set | [components/navigation.md](references/components/navigation.md) |
 
 ---
 
@@ -240,54 +218,54 @@ See [references/nextjs.md](references/nextjs.md) for CSS vars, Tailwind v4 `@the
 
 | Task | Guide |
 |------|-------|
-| Implement screen from Figma | [playbook.md](playbook.md) |
+| Implement a screen | [playbook.md](playbook.md) |
 | UI consistency audit | [playbook.md](playbook.md) |
-| Refresh tokens after Figma update | [playbook.md](playbook.md) |
+| Refresh tokens | [playbook.md](playbook.md) |
 | Brand / UX rules | [design.md](design.md) |
 
 ---
 
-## Updating the skill
+## Repository structure
 
-When the Figma library changes:
-
-1. Re-run Figma MCP extraction (`search_design_system`, `get_variable_defs` on bound instances)
-2. Update `references/tokens.md` and affected reference files
-3. Commit and push to this repo
-4. Pull or re-clone wherever your team installs the skill
-
-**Do not edit Figma from the skill.** Read-only via MCP.
+```
+ikhlas/
+├── README.md                 ← You are here
+├── SKILL.md                  ← Main agent entry point
+├── design.md                 ← Brand principles, do/don't, accessibility
+├── playbook.md               ← Implement screen, UI audit, token refresh
+├── examples/
+│   └── implementations.md    ← Before/after design → code samples
+└── references/
+    ├── tokens.md             ← Master token index (Flutter + Next.js)
+    ├── colors.md             ← Full color palette with hex
+    ├── typography.md         ← DM Sans type scale
+    ├── spacing.md            ← 4px grid (space2–space80)
+    ├── radius-shadows.md     ← 12px card default, 4px info banner
+    ├── motion.md             ← Motion defaults
+    ├── flutter.md            ← ThemeExtension, spacing, widgets
+    ├── nextjs.md             ← CSS vars, Tailwind v4 @theme, fonts
+    ├── components/
+    │   ├── buttons.md
+    │   ├── cards.md
+    │   ├── navigation.md
+    │   ├── feedback.md
+    │   ├── activity-detail.md
+    │   └── skeleton-ui.md
+    └── patterns/
+        ├── lists.md
+        ├── forms.md
+        └── empty-states.md
+```
 
 ---
 
-## Known gaps
+## Contributing
 
-These Figma fill styles exist but hex was not bound on any instance during extraction:
-
-| Style | Intended use |
-|-------|--------------|
-| Darker Teal | Pressed/clicked CTA |
-| Grey 300 | Disabled button |
-| Dark Gold | Secondary link |
-
-To resolve: select the relevant instance in Figma desktop, then run `get_variable_defs` via Figma MCP.
-
-Input `component_set` is not in this library — check the Customer App file (`r1ODKpGXGqwwDlOinO00ge`) for form fields.
-
----
-
-## Internal usage
-
-This skill is maintained for **internal IKHLAS product and engineering use**. It is not a public design system site or open-source UI kit.
-
-- Keep the repo access limited to your team
-- Do not redistribute Figma assets outside approved channels
-- Token values should match the live Figma library — report drift to design ops
+Token values and component specs in this repo should stay in sync with the live design system. If you find drift, open an issue or PR with the corrected token values and reference the semantic name from the design system.
 
 ---
 
 ## Links
 
 - **GitHub:** https://github.com/shahrulestar/ikhlas
-- **Figma library:** https://www.figma.com/design/Yi0hAYFAqMEDEvjhqA020v/IKHLAS-App-UI-Styles
 - **IKHLAS:** https://ikhlas.com

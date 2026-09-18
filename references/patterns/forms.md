@@ -1,6 +1,6 @@
 # Form Patterns
 
-No dedicated `input` component_set found in library search. Forms likely live in Customer App file (r1ODKpGXGqwwDlOinO00ge).
+No dedicated `input` component documented yet. Spec below is inferred from design system tokens.
 
 ## Inferred from design system tokens
 
@@ -12,7 +12,7 @@ No dedicated `input` component_set found in library search. Forms likely live in
 | Border | Grey 200, 1px |
 | Focus border | Primary Teal |
 | Field padding | space12 vertical, space16 horizontal |
-| Field radius | 8px or 12px — verify in Customer App |
+| Field radius | 8px or 12px — verify against design reference |
 | Error text | 12px Caption, Red |
 | Error border | Red |
 
@@ -28,6 +28,5 @@ Place `info` banner above form sections when contextual help is needed (see [com
 ## Validation
 
 When implementing forms:
-1. Check Customer App Figma for input component instances
-2. Call `get_design_context` on specific input nodes
-3. Update this file if input component_set is found
+1. Check the design reference for input component specs
+2. Update this file once input component tokens are confirmed

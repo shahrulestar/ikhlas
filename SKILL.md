@@ -1,13 +1,12 @@
 ---
 name: ikhlas-app-ui
 description: >-
-  Implements UI using the IKHLAS App design system (Figma library Yi0hAYFAqMEDEvjhqA020v).
-  Maps Figma tokens to Flutter and Next.js code, reuses IKH components, and enforces
-  spacing, color, and typography rules. Use when building IKHLAS app screens (Flutter
-  mobile or Next.js web), implementing Figma designs, auditing UI consistency, or when
-  the user mentions IKHLAS, IKH, IDS, or IKHLAS App UI Styles.
+  Implements UI using the IKHLAS App design system. Maps design tokens to Flutter
+  and Next.js code, reuses IKH components, and enforces spacing, color, and
+  typography rules. Use when building IKHLAS app screens (Flutter mobile or
+  Next.js web), auditing UI consistency, or when the user mentions IKHLAS, IKH,
+  IDS, or IKHLAS App UI Styles.
 references:
-  - figma-source
   - tokens
   - colors
   - typography
@@ -20,19 +19,20 @@ references:
   - components/navigation
   - components/feedback
   - components/skeleton-ui
+  - components/activity-detail
   - patterns/lists
   - patterns/forms
 ---
 
 # IKHLAS App UI Design System
 
-Internal AI agent skill for **Flutter (mobile)** and **Next.js (web)**. Same design language, same tokens. Load `SKILL.md` at session start or when the user names this skill explicitly.
+AI agent skill for **Flutter (mobile)** and **Next.js (web)**. Same design language, same tokens. Load `SKILL.md` at session start or when the user names this skill explicitly.
 
 ## When to load
 
 Load when the user mentions:
 - IKHLAS, IKH, IDS, Ikhlas App, ikhlas.com web
-- Implementing screens from the IKHLAS Figma library
+- Implementing IKHLAS app screens
 - Flutter ThemeData / ThemeExtension for IKHLAS
 - Next.js / Tailwind styling for IKHLAS web
 
@@ -40,22 +40,9 @@ Load when the user mentions:
 
 1. Identify platform: **Flutter** → [references/flutter.md](references/flutter.md); **Next.js** → [references/nextjs.md](references/nextjs.md)
 2. Resolve tokens from [references/tokens.md](references/tokens.md) — never use magic numbers
-3. If a Figma URL is provided, call Figma MCP `get_design_context` on the target node (read [references/figma-source.md](references/figma-source.md))
+3. Look up component specs in [references/components/](references/components/) before building from scratch
 4. Reuse existing project components before creating new ones
 5. Validate against [playbook.md](playbook.md) audit checklist
-
-## Figma source (read-only)
-
-| Field | Value |
-|-------|-------|
-| File | IKHLAS App UI Styles |
-| fileKey | `Yi0hAYFAqMEDEvjhqA020v` |
-| libraryKey | `lk-d22f4ea0ae582208e0db86e002a131dc653b259a72c1be5a92b380efd7fe05cea4c5f713019724c5ccd8fa9c58c91580803549e0cab71a78a5d647ac0715e765` |
-| Linked library | V6.0 - Figma Design Library |
-
-**Do not edit Figma.** Read via MCP only: `search_design_system`, `get_metadata`, `get_design_context`, `get_variable_defs`.
-
-Full node map: [references/figma-source.md](references/figma-source.md)
 
 ## Token resolution rules
 
@@ -65,14 +52,13 @@ Full node map: [references/figma-source.md](references/figma-source.md)
 4. **Radius:** Default card/action radius is **12px** (IKHLAS-3640). See [references/radius-shadows.md](references/radius-shadows.md).
 5. **Platform mapping:** Every token has Flutter + Next.js equivalents in [references/tokens.md](references/tokens.md).
 
-## Implement screen from Figma
+## Implement screen
 
 ### Gate protocol
 
-1. Parse URL → `fileKey` + `nodeId` (convert `-` to `:`)
-2. Call Figma MCP `get_design_context` on the parsed nodeId
-3. Map output to platform tokens (not raw Tailwind from Figma export)
-4. Reuse library components where they exist in the codebase
+1. Read the relevant component and pattern references for the screen
+2. Map layout to platform tokens (not raw Tailwind from design exports)
+3. Reuse library components where they exist in the codebase
 
 ### Flutter branch
 
@@ -110,8 +96,6 @@ See [references/nextjs.md](references/nextjs.md) for CSS vars + Tailwind v4 them
 | header, IKHLAS Logo | [references/components/navigation.md](references/components/navigation.md) |
 | info, notice | [references/components/feedback.md](references/components/feedback.md) |
 
-Search Figma library: `search_design_system` with `includeLibraryKeys` set to the IKHLAS libraryKey above.
-
 ## UI audit checklist
 
 Copy from [playbook.md](playbook.md#ui-consistency-audit). Fail if:
@@ -122,13 +106,14 @@ Copy from [playbook.md](playbook.md#ui-consistency-audit). Fail if:
 
 ## Token refresh
 
-When Figma library updates:
-1. Re-run `search_design_system` for variables and styles
-2. Diff against [references/tokens.md](references/tokens.md)
-3. Update reference files; keep SKILL.md under 500 lines
+When the design system updates:
+1. Diff new token values against [references/tokens.md](references/tokens.md)
+2. Update affected reference files
+3. Keep SKILL.md under 500 lines
 
 ## Additional resources
 
 - Brand & UX principles: [design.md](design.md)
 - Task recipes: [playbook.md](playbook.md)
 - Code examples: [examples/implementations.md](examples/implementations.md)
+- Full docs index: [README.md](README.md)

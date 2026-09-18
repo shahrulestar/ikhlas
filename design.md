@@ -38,8 +38,7 @@ Mobile (Flutter) and web (Next.js) share the same tokens. Differences are layout
 
 - Invent spacing values (especially 10px — use space8 or space12)
 - Use fonts other than DM Sans
-- Hard-code colors when a Figma fill style or variable exists
-- Edit the Figma library file
+- Hard-code colors when a semantic token exists in [references/colors.md](references/colors.md)
 - Mix Material Design icons with IKHLAS custom icons in the same context
 
 ## Accessibility

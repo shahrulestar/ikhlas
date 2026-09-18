@@ -1,10 +1,10 @@
 # Implementation Examples
 
-Before/after: Figma export → platform-native tokens.
+Before/after: design export → platform-native tokens.
 
 ## action_card
 
-### Figma export (do NOT paste as-is)
+### Design export (do NOT paste as-is)
 
 ```tsx
 <div className="bg-[#f0f9f9] p-[var(--spacing/space16,16px)] rounded-[12px]">
@@ -44,7 +44,7 @@ ActionCard(
 
 ## Primary CTA
 
-### Figma raw
+### Design export raw
 
 ```tsx
 <div className="bg-[#00938f] px-[24px] py-[11px] rounded-[12px]">
@@ -76,7 +76,7 @@ FilledButton(
 
 ## info banner
 
-### Figma raw
+### Design export raw
 
 ```tsx
 <div className="bg-[#eaf1fb] border border-[#2f73d2] rounded-[4px] px-[16px] py-[8px]">
@@ -115,11 +115,11 @@ padding: EdgeInsets.all(IkhlasSpacing.space12)  // or space8 for compact
 
 ## activity_detail sections (Sadaqah)
 
-Generated in Figma via `use_figma` + IKHLAS text styles. See [activity-detail.md](../references/components/activity-detail.md). Zakat variant: node `11639:291235`.
+See [activity-detail.md](../references/components/activity-detail.md) for full layout spec and product variants.
 
-### Figma export (do NOT paste as-is)
+### Design export (do NOT paste as-is)
 
-Absolute-positioned grid rows from `get_design_context` — use auto-layout instead.
+Absolute-positioned grid rows from design tools — use auto-layout instead.
 
 ### Next.js (correct)
 

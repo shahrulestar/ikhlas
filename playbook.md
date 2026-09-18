@@ -2,32 +2,23 @@
 
 Task recipes for agents using the ikhlas-app-ui skill.
 
-## Implement screen from Figma URL
+## Implement screen
 
 ### Prerequisites
 
-- Call Figma MCP `get_design_context` on the target node before writing code
+- Read relevant component and pattern references before writing code
 - Confirm platform: Flutter or Next.js
 
 ### Steps
 
 ```
 Task Progress:
-- [ ] Parse Figma URL (fileKey + nodeId)
-- [ ] Call get_design_context on target node
+- [ ] Identify screen type and load component/pattern references
 - [ ] Identify platform stack in target codebase
-- [ ] Map Figma tokens → IkhlasSpacing / --ikh-* CSS vars
+- [ ] Map design tokens → IkhlasSpacing / --ikh-* CSS vars
 - [ ] Reuse existing IKH components from project
 - [ ] Implement layout (mobile 390px or web 1440px as designed)
 - [ ] Run UI audit checklist below
-```
-
-### URL parsing
-
-```
-https://www.figma.com/design/Yi0hAYFAqMEDEvjhqA020v/...?node-id=1256-22296
-→ fileKey: Yi0hAYFAqMEDEvjhqA020v
-→ nodeId: 1256:22296
 ```
 
 ### Flutter branch
@@ -71,11 +62,10 @@ Report findings as:
 
 ## Add new component
 
-1. Search Figma first: `search_design_system` with entity `component`
-2. If component_set exists, call `get_design_context` on an instance node
-3. Document in `references/components/<name>.md` if not already covered
-4. Implement in both platforms if shared, or note platform-specific variant
-5. Name code components to match Figma: `action_card` → `ActionCard`
+1. Check existing component references in `references/components/`
+2. Document in `references/components/<name>.md` if not already covered
+3. Implement in both platforms if shared, or note platform-specific variant
+4. Name code components to match design system: `action_card` → `ActionCard`
 
 ---
 
@@ -91,27 +81,23 @@ Report findings as:
 | #616161 | `Grey 700` / body secondary |
 | 12px radius | `radius-md` / `BorderRadius.circular(12)` |
 
-When Figma exports raw hex, cross-check [references/colors.md](references/colors.md).
+When design exports raw hex, cross-check [references/colors.md](references/colors.md).
 
 ---
 
-## Token refresh from Figma
+## Token refresh
 
-1. `search_design_system` query `space8` entity `variable` — lists all spacing vars
-2. `search_design_system` query `Teal` entity `style` — lists fill styles
-3. `search_design_system` query `Body` entity `style` — lists text styles
-4. `get_design_context` on representative component instances for bound values
-5. Diff and update `references/tokens.md`, `colors.md`, `typography.md`
-
-**Limitation:** `get_variable_defs` requires a selected layer in Figma desktop; prefer `search_design_system` + `get_design_context` hints.
+1. Diff new token values against [references/tokens.md](references/tokens.md)
+2. Update `references/colors.md`, `references/typography.md`, and affected component files
+3. Keep SKILL.md under 500 lines
 
 ---
 
-## Figma design-to-code rules
+## Design-to-code rules
 
-**Always** call `get_design_context` before implementing a Figma node as code:
+When implementing from a design reference:
 
-- Treat MCP output as reference, not paste-ready code
-- Map to platform tokens — honor token hints over raw hex from export
-- Preserve icon/image assets from Figma exports; do not redraw or omit
+- Treat raw exports as reference, not paste-ready code
+- Map to platform tokens — honor semantic names over raw hex from export
+- Preserve icon/image assets from exports; do not redraw or omit
 - Adapt to Flutter or Next.js per [references/flutter.md](references/flutter.md) / [references/nextjs.md](references/nextjs.md)

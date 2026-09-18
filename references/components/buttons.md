@@ -52,7 +52,7 @@ See [nextjs.md](../nextjs.md) Primary CTA and button_link patterns.
 
 ## Disabled state
 
-Use Grey 300 fill style (resolve hex from Figma). Do not reduce opacity alone.
+Use Grey 300 fill style (see [colors.md](../colors.md)). Do not reduce opacity alone.
 
 ## Don't
 
