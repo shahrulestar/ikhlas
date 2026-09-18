@@ -19,6 +19,7 @@ references:
   - components/cards
   - components/navigation
   - components/feedback
+  - components/skeleton-ui
   - patterns/lists
   - patterns/forms
 ---
@@ -104,6 +105,8 @@ See [references/nextjs.md](references/nextjs.md) for CSS vars + Tailwind v4 them
 |-----------|-----------|
 | button, button_link | [references/components/buttons.md](references/components/buttons.md) |
 | action_card, user_greeting_card | [references/components/cards.md](references/components/cards.md) |
+| activity_detail sections | [references/components/activity-detail.md](references/components/activity-detail.md) |
+| skeleton UI | [references/components/skeleton-ui.md](references/components/skeleton-ui.md) |
 | header, IKHLAS Logo | [references/components/navigation.md](references/components/navigation.md) |
 | info, notice | [references/components/feedback.md](references/components/feedback.md) |
 

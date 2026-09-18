@@ -47,8 +47,60 @@ Node ID:      Convert 1256-22296 → 1256:22296 for MCP tools
 | home header | 1256:22066 | Secondary Teal `#00B2A9` |
 | bottom bar | 1256:22313 | Grey 600 / Grey 200 |
 | notice | 1503:19843 | Grey 50 candidate `#F8F8F8` |
+| activity_detail sections (Sadaqah) | 11610:34052 | Key-value section cards, Customer App 2.0 |
+| activity_detail sections (Zakat) | 11734:292043 | Key-value section cards, aligned to Zakat email receipt |
+| Activity Details Zakat (full screen) | 11639:291235 | Mobile Activity Detail with CTA support |
+| [Zakat] Payment Receipt Email | 11717:24994 | Email receipt field source, Current UI section |
+| skeleton UI (Events Calendar) | 11649:291687 | Loading placeholders, Customer App 2.0 |
+| Chatwoot Agent V1 Zakat | 11666:690 | Agent dashboard, system message only, Zakat section |
+| Chatwoot Agent V2 Qurban | 11666:783 | Agent dashboard, full thread, Zakat section |
+| Chatwoot Agent Q02 Zakat Receipt | 11669:19343 | Q02 PPZ-MAIWP receipt thread, Zakat section |
+| Chatwoot Agent Sadaqah Help FAQ Q03 | 11748:3293 | Agent dashboard, Help/FAQ processing fee, Sadaqah section |
+| Chatwoot Agent Sadaqah Activity Q04 | 11748:3396 | Agent dashboard, Activity Detail LHDN tax relief, Sadaqah section |
+| Lifestyle Services — Sadaqah Chatwoot | 11707:1432 | 5 inbox Q&A frames + welcome, CHAR-3276 |
+| Lifestyle Services — Fidyah Chatwoot | 11707:1433 | 5 inbox Q&A frames + welcome, CHAR-3276 |
+| Lifestyle Services — Aqiqah Chatwoot | 11707:1434 | 5 inbox Q&A frames + welcome, CHAR-3276 |
+| Aqiqah support section | 11755:17075 | 3 convo situations (new / resume / past post-receipt) |
+| Activity Details Aqiqah | 11755:17320 | Mobile Activity Detail aligned to Aqiqah receipt email |
+| [Aqiqah] Payment Receipt Email | 11755:19410 | Email receipt field source, Aqiqah section |
+| Chatwoot Agent Aqiqah Q01 new | 11755:17655 | Agent dashboard, new convo from Help |
+| Chatwoot Agent Aqiqah Q03 Activity | 11755:17857 | Agent dashboard, order support from Activity CTA |
+| Chatwoot Agent Aqiqah Q03 resolved | 11755:17550 | Agent dashboard, past convo full thread |
+| Chatwoot Agent Aqiqah Default | 11755:17758 | Agent dashboard, empty ticket |
+| Fidyah support section | 11759:19963 | 3 convo situations (new / resume / past post-receipt) |
+| Activity Details Fidyah | 11759:20192 | Mobile Activity Detail aligned to Fidyah receipt email |
+| [Fidyah] Payment Receipt Email (section) | 11763:4677 | Email receipt in Fidyah section (cloned from 11717:25121) |
+| Chatwoot Agent Fidyah Q01 new | 11759:20529 | Agent dashboard, new convo from Help |
+| Chatwoot Agent Fidyah Q03 Activity | 11759:20731 | Agent dashboard, order support from Activity CTA |
+| Chatwoot Agent Fidyah Q03 resolved | 11759:20424 | Agent dashboard, past convo full thread |
+| Chatwoot Agent Fidyah Default | 11759:20632 | Agent dashboard, empty ticket |
 | desktop marketing | 1167:26114 | Branding/Red `#E94335` |
 | Iconography page | 410:21385 | Icon comparison frame |
+
+## Chatwoot system automated messages (CHAR-3276)
+
+Updated 2026-09-18 across Sadaqah, Zakat, Aqiqah, and Fidyah service sections (35 nodes: mobile inbox + agent dashboard).
+
+**Scenario A — Specific Order** (Activity Detail CTA, past post-receipt inbox):
+
+```
+🤖 [System Automated Message] We have initiated a support ticket for {product} Order #{orderId}. Please describe your issue below, and our support team will assist you shortly, insha Allah.
+```
+
+**Scenario B — General Inquiry** (Homepage → Help, resume convo, default/welcome):
+
+```
+🤖 [System Automated Message] We have initiated a General Inquiry ticket for {product}. Please describe your issue below, and our support team will assist you shortly, insha Allah.
+```
+
+| Product | Order ID (Scenario A) | Scenario A entry | Scenario B entry |
+|---------|----------------------|------------------|------------------|
+| Sadaqah | `#SD20250806001` | Activity Detail → Q04 LHDN | Help → Q03 Processing fee |
+| Zakat | `#ZK20250915001` | Activity Detail → Q04 Tax relief | Help → Q02 Receipt PPZ-MAIWP, Default |
+| Aqiqah | `#177198008508834967` | Activity → Q03 Video proof; past resolved | Help → Q01 Day of Aqiqah (new/resume), Default |
+| Fidyah | `#175153016225847588` | Activity → Q03 Elderly/chronic; past resolved | Help → Q01 Daily rate (new/resume), Default |
+
+Mobile inbox and agent dashboard threads for the same situation must show identical system copy.
 
 ## Color re-extract (2026-09-11)
 
