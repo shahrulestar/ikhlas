@@ -2,7 +2,9 @@
 
 Loading placeholders that mirror the layout of loaded content. Used while data is fetching.
 
-Primary reference implementation: **Events Calendar** loading states.
+Use skeletons for **first load** only. For submit / processing use the spinner overlay ([overlays.md](overlays.md#loading-overlay-spinner)). All states: [patterns/states.md](../patterns/states.md).
+
+Primary reference implementations: **Events Calendar** and **Event details** loading states.
 
 ### Frame variants
 
@@ -19,11 +21,14 @@ Primary reference implementation: **Events Calendar** loading states.
 |----------|-------|-------|
 | Fill color | `#EAEAEA` | `--ikh-grey-200` / Grey 200 |
 | Opacity | 50% | — |
-| Text line radius | 4px | `--ikh-radius-sm` |
-| Badge / pill radius | 4px | `--ikh-radius-sm` |
-| Circle (nav chevron, indicator dot) | 9999 / 12×12 | — |
+| Text line / text block radius | 6px | `--ikh-radius-skeleton-text` |
+| Image block radius | 8px | `--ikh-radius-skeleton-image` |
+| Badge / chip / pill radius | 24px | `--ikh-radius-pill` |
+| Button placeholder radius | 12px (358 × 48) | `--ikh-radius-md` |
+| Calendar cells, week headers, month nav | 4px | `--ikh-radius-sm` |
+| Circle (nav chevron, indicator dot) | 9999 / 12×12 | `--ikh-radius-full` |
 
-**Rule:** All skeleton blocks use Grey 200 at 50% opacity. Do not use other greys or full-opacity fills.
+**Rule:** All skeleton blocks use Grey 200 at 50% opacity on a white background. Do not use other greys or full-opacity fills. Match the radius of the element being replaced.
 
 **Calendar cell rule:** Apply the skeleton fill directly to each date frame — no inner rectangles. Remove child content; the frame itself becomes the placeholder. All date frames must be **48×55** (fixed). Set grid `gridRowSizes` to `FIXED 55` for every row so no row collapses shorter than the others.
 
@@ -40,8 +45,11 @@ Duplicate the loaded UI structure, then replace dynamic content with skeleton bl
 - Status bar instance
 - Navbar background + back button instance
 - Tab bar structure + active underline bar
-- Card outer frame (white fill, 1px Grey 200 border, 4px radius)
+- Card outer frame (white fill, 1px Grey 200 border, 12px radius; 4px on legacy list cards)
 - Separator lines (1px Grey 200)
+- Navbar icons (back, share, info) stay visible
+
+The header is part of the shell and is **not** dimmed for skeletons; only the spinner overlay dims the header.
 
 ### Dynamic content (skeletonize)
 
@@ -56,11 +64,12 @@ Duplicate the loaded UI structure, then replace dynamic content with skeleton bl
 | Empty state | 200×24 + 200×42 centered |
 | Summary row | 12×12 dot + 338×21 bar |
 | Event list card | dates 84×24 + 84×36; badge 56×24; title 220×42 |
+| Event details | image 358×188 (r8); chips 186–217×24 (r24); text 358×28 (r6); button 358×48 (r12); body 358×161 (r6) |
 
 ## Event list card structure
 
 ```
-Event list card (358×102, border grey200, radius 4)
+Event list card (358×102, border grey200, radius 12; legacy frames radius 4)
 └── Event list item (HORIZONTAL, gap 16)
     ├── Dates frame (100×80)
     │   ├── skeleton 84×24
@@ -79,31 +88,9 @@ Month Container (358, VERTICAL, gap 16)
 └── Event list card (skeleton)
 ```
 
-## Calendar date cell component
+## Calendar component and screen
 
-| Variant | Date Box | Text | Indicators |
-|---------|----------|------|------------|
-| Default | 47.71×39, radius 4, no fill | Gregorian `#212124`, Hijri `#75767A` | 14px row, empty |
-| Today | Fill solid `#00B2A9` | White | 14px row, empty |
-| Focused | Fill `#00B2A9` @ 10% | Gregorian + Hijri `#212124` | Brand dots 6×6 |
-
-**Cell structure:** Calendar cell 47.71×55 = Date Box (39px) + Indicators (14px). Radius 4 applies to **Date Box**, not the outer cell.
-
-**Event indicator dots:** Default **off**. Dots only on days with events. Today/Focused cells keep state styling without dots unless that day has events.
-
-## Calendar screen structure
-
-```
-Calendar screen (390×844)
-├── navbar (shell)
-├── Primary tab (shell + skeleton labels)
-└── Section
-    └── Calendar Container
-        ├── Calendar navigation (chevrons + date bars)
-        ├── Calendar grid (week headers + Calendar component cells)
-        ├── separator
-        └── Empty state OR Summary of the month
-```
+Date cell variants (default / today / focused), event dots and the calendar screen structure live in [calendar.md](calendar.md). Skeletonize that structure using the rules above.
 
 ## Code mapping
 

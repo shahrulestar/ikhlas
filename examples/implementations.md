@@ -44,16 +44,18 @@ ActionCard(
 
 ## Primary CTA
 
-### Design export raw
+### Design export raw (legacy screen — do NOT copy the colour or radius)
 
 ```tsx
-<div className="bg-[#00938f] px-[24px] py-[11px] rounded-[12px]">
+<div className="bg-[#00b2a9] px-[24px] py-[12px] rounded-[4px]">
 ```
+
+Older screens use Secondary Teal and 4px. The IDS button is Primary Teal, 12px radius ([legacy-migration.md](../references/legacy-migration.md)).
 
 ### Next.js (correct)
 
 ```tsx
-<button className="rounded-[var(--ikh-radius-md)] bg-[var(--ikh-dark-teal)] px-6 py-[11px] text-base font-medium text-white">
+<button className="h-12 rounded-[var(--ikh-radius-md)] bg-[var(--ikh-primary-teal)] px-[var(--ikh-space-24)] py-[var(--ikh-space-12)] text-base font-medium text-white hover:bg-[var(--ikh-darker-teal)] disabled:bg-[var(--ikh-grey-300)]">
   Daftar Di Sini
 </button>
 ```
@@ -63,9 +65,11 @@ ActionCard(
 ```dart
 FilledButton(
   style: FilledButton.styleFrom(
-    backgroundColor: IkhlasColors.darkTeal,
+    backgroundColor: IkhlasColors.primaryTeal,
+    disabledBackgroundColor: IkhlasColors.grey300,
+    minimumSize: const Size.fromHeight(48),
     shape: RoundedRectangleBorder(borderRadius: IkhlasRadius.button),
-    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 11),
+    padding: const EdgeInsets.symmetric(horizontal: IkhlasSpacing.space24, vertical: IkhlasSpacing.space12),
   ),
   onPressed: onRegister,
   child: Text('Daftar Di Sini', style: IkhlasTypography.bodyMedium.copyWith(color: Colors.white)),
@@ -74,9 +78,9 @@ FilledButton(
 
 ---
 
-## info banner
+## notice (information)
 
-### Design export raw
+### Design export raw (legacy "info" banner)
 
 ```tsx
 <div className="bg-[#eaf1fb] border border-[#2f73d2] rounded-[4px] px-[16px] py-[8px]">
@@ -85,14 +89,93 @@ FilledButton(
 ### Next.js (correct)
 
 ```tsx
-<div className="rounded-[var(--ikh-radius-sm)] border border-[var(--ikh-info-blue)] bg-[var(--ikh-info-blue-bg)] px-[var(--ikh-space-16)] py-2">
-  <div className="flex gap-[var(--ikh-space-8)]">
-    <InfoOutline className="size-6 text-[var(--ikh-info-blue-text)]" />
-    <p className="text-xs leading-normal text-[var(--ikh-info-blue-text)]">
-      You can calculate Zakat Harta for yourself on the year selected.
-    </p>
-  </div>
+<div className="flex gap-[var(--ikh-space-8)] rounded-[var(--ikh-radius-md)] border border-[var(--color-ikh-notice-info-border)] bg-[var(--color-ikh-info-blue-bg)] px-[var(--ikh-space-16)] py-[var(--ikh-space-8)]">
+  <InfoOutline className="size-6 shrink-0 text-[var(--color-ikh-info-blue-text)]" />
+  <p className="text-xs leading-[18px] text-[var(--color-ikh-info-blue-text)]">
+    You can calculate Zakat Harta for yourself on the year selected.
+  </p>
 </div>
+```
+
+### Flutter (correct)
+
+```dart
+IkhlasNotice(
+  style: IkhlasNoticeStyle.information,
+  message: 'You can calculate Zakat Harta for yourself on the year selected.',
+)
+```
+
+---
+
+## Offline state
+
+See [states.md](../references/patterns/states.md#offline).
+
+### Flutter (correct)
+
+```dart
+Center(
+  child: Padding(
+    padding: const EdgeInsets.symmetric(horizontal: IkhlasSpacing.space16),
+    child: Column(mainAxisSize: MainAxisSize.min, children: [
+      Image.asset('assets/illustrations/offline.png', width: 200),
+      const SizedBox(height: IkhlasSpacing.space16),
+      Text('You are currently in offline mode', style: IkhlasTypography.h3, textAlign: TextAlign.center),
+      const SizedBox(height: IkhlasSpacing.space8),
+      Text("Make sure that you're connected to the internet.",
+          style: IkhlasTypography.subBody.copyWith(color: IkhlasColors.grey600), textAlign: TextAlign.center),
+      const SizedBox(height: IkhlasSpacing.space16),
+      OutlinedButton(onPressed: onRetry, child: const Text('Retry')),
+    ]),
+  ),
+)
+```
+
+### Next.js (correct)
+
+```tsx
+<section className="flex flex-col items-center gap-[var(--ikh-space-8)] px-[var(--ikh-space-16)] text-center">
+  <Image src="/illustrations/offline.webp" alt="" width={200} height={200} />
+  <h2 className="mt-[var(--ikh-space-8)] text-xl font-medium leading-7 text-[var(--ikh-black)]">You are currently in offline mode</h2>
+  <p className="text-sm leading-[21px] text-[var(--ikh-grey-600)]">Make sure that you&apos;re connected to the internet.</p>
+  <button onClick={onRetry} className="mt-[var(--ikh-space-8)] rounded-[var(--ikh-radius-full)] border border-[var(--ikh-grey-200)] px-[var(--ikh-space-16)] py-1 text-sm font-medium">
+    Retry
+  </button>
+</section>
+```
+
+---
+
+## Confirmation dialog
+
+See [overlays.md](../references/components/overlays.md#dialog).
+
+### Flutter (correct)
+
+```dart
+showDialog<bool>(
+  context: context,
+  barrierColor: IkhlasColors.overlay,
+  builder: (context) => Dialog(
+    shape: RoundedRectangleBorder(borderRadius: IkhlasRadius.card),
+    insetPadding: const EdgeInsets.symmetric(horizontal: IkhlasSpacing.space16),
+    child: Padding(
+      padding: const EdgeInsets.all(IkhlasSpacing.space24),
+      child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text('Confirmation', style: IkhlasTypography.bodyMedium),
+        const SizedBox(height: IkhlasSpacing.space8),
+        Text('Are you sure to delete your account?', style: IkhlasTypography.subBody.copyWith(color: IkhlasColors.grey600)),
+        const SizedBox(height: IkhlasSpacing.space24),
+        Row(children: [
+          Expanded(child: OutlinedButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel'))),
+          const SizedBox(width: IkhlasSpacing.space16),
+          Expanded(child: FilledButton(onPressed: () => Navigator.pop(context, true), child: const Text('Yes'))),
+        ]),
+      ]),
+    ),
+  ),
+);
 ```
 
 ---
@@ -125,7 +208,7 @@ Absolute-positioned grid rows from design tools — use auto-layout instead.
 
 ```tsx
 <div className="flex w-[358px] flex-col gap-[var(--ikh-space-16)]">
-  <div className="rounded-[var(--ikh-radius-sm)] border border-[var(--ikh-grey-200)] bg-[var(--ikh-white)]">
+  <div className="rounded-[var(--ikh-radius-md)] border border-[var(--ikh-grey-200)] bg-[var(--ikh-white)]">
     <p className="px-[var(--ikh-space-16)] pt-[var(--ikh-space-16)] text-sm text-[var(--ikh-grey-600)]">Payment paid</p>
     <div className="flex min-h-[50px] items-center justify-between px-[var(--ikh-space-16)] py-[13px]">
       <p className="text-base text-[var(--ikh-black)]">Date Paid</p>
@@ -161,13 +244,13 @@ Column(
 
 ## activity_detail sections (Zakat)
 
-Aligned to `[Zakat] Payment Receipt Email` (`11717:24994`). See [activity-detail.md](../references/components/activity-detail.md).
+Aligned to the `[Zakat] Payment Receipt Email` screen. See [activity-detail.md](../references/components/activity-detail.md).
 
 ### Next.js (correct)
 
 ```tsx
 <div className="flex w-[358px] flex-col gap-[var(--ikh-space-16)]">
-  <div className="rounded-[var(--ikh-radius-sm)] border border-[var(--ikh-grey-200)] bg-[var(--ikh-white)]">
+  <div className="rounded-[var(--ikh-radius-md)] border border-[var(--ikh-grey-200)] bg-[var(--ikh-white)]">
     <p className="px-[var(--ikh-space-16)] pt-[var(--ikh-space-16)] text-sm text-[var(--ikh-grey-600)]">Payment paid</p>
     <div className="flex min-h-[50px] items-center justify-between px-[var(--ikh-space-16)] py-[13px]">
       <p className="text-base text-[var(--ikh-black)]">Zakat Body</p>
@@ -220,15 +303,78 @@ Column(
 
 ---
 
+## Chatwoot auto-greeting
+
+See [activity-detail.md](../references/components/activity-detail.md#chatwoot-auto-greeting-char-3276). Applies to **both** General Inquiry and order-scoped flows.
+
+### Next.js (correct — mobile + dashboard greeting)
+
+```tsx
+const CHATWOOT_AUTO_GREETING = (service: 'Zakat' | 'Sadaqah' | 'Aqiqah' | 'Fidyah') =>
+  `Assalamualaikum Ahmad, thank you for contacting ikhlas.com ${service} support. How can I assist you today?`;
+
+CHATWOOT_AUTO_GREETING('Zakat');
+```
+
+### Next.js (correct — agent dashboard timestamp)
+
+Greeting timestamp = system message timestamp + 1 minute. Mobile inbox does not show per-message timestamps.
+
+```tsx
+function addOneMinute(timeStr: string): string {
+  // Parse "Aug 29, 11:08 AM" or "03 Jul, 4:08 PM", add 1 min, preserve format
+  const match = timeStr.match(/^(\d{1,2}|\w{3})\s+(\w{3}|\d{1,2}),\s+(\d{1,2}):(\d{2})\s+(AM|PM)$/i);
+  if (!match) return timeStr;
+  // …increment minute, handle hour rollover…
+  return 'Aug 29, 11:09 AM'; // example output for Zakat Q02 dashboard
+}
+```
+
+---
+
+## Chatwoot order-scoped system message
+
+Use the canonical booking number from [activity-detail.md](../references/components/activity-detail.md#booking-number-cross-reference-char-3276). **General Inquiry** flows must not include an order number.
+
+### Next.js (correct — order-scoped)
+
+```tsx
+const SYSTEM_ORDER_SCOPED = (product: string, bookingNo: string) =>
+  `🤖 [System Automated Message] We have initiated a support ticket for ${product} Order #${bookingNo}. Please describe your issue below, and our support team will assist you shortly, insha Allah.`;
+
+// Zakat Q04 Tax relief
+SYSTEM_ORDER_SCOPED('Zakat', '175151710359226912');
+
+// Sadaqah Q04 LHDN tax relief
+SYSTEM_ORDER_SCOPED('Sadaqah', '175152983907978266');
+```
+
+### Next.js (correct — General Inquiry, no booking no)
+
+```tsx
+const SYSTEM_GENERAL_INQUIRY = (product: string) =>
+  `🤖 [System Automated Message] We have initiated a General Inquiry ticket for ${product}. Please describe your issue below, and our support team will assist you shortly, insha Allah.`;
+
+SYSTEM_GENERAL_INQUIRY('Zakat');
+```
+
+### Inbox list subtitle (order-scoped)
+
+```tsx
+<p className="text-sm text-[var(--ikh-grey-600)]">Order #175151710359226912</p>
+```
+
+---
+
 ## skeleton UI
 
-Loading placeholders for Events Calendar. See [skeleton-ui.md](../references/components/skeleton-ui.md).
+First-load placeholders (Events Calendar, Event details). See [skeleton-ui.md](../references/components/skeleton-ui.md).
 
 ### Token (correct)
 
 ```
 Fill: #EAEAEA (--ikh-grey-200) @ 50% opacity
-Radius: 4px for bars, 9999 for circles
+Radius: 6px text, 24px chips, 8px images, 12px buttons/cards, 4px calendar cells, 9999 circles
 ```
 
 ### Next.js (correct)
@@ -237,14 +383,14 @@ Radius: 4px for bars, 9999 for circles
 function SkeletonBlock({ className }: { className?: string }) {
   return (
     <div
-      className={cn('rounded-[var(--ikh-radius-sm)] bg-[var(--ikh-grey-200)] opacity-50', className)}
+      className={cn('rounded-[var(--ikh-radius-skeleton-text)] bg-[var(--ikh-grey-200)] opacity-50', className)}
       aria-hidden
     />
   );
 }
 
 // Event list card skeleton
-<div className="flex gap-[var(--ikh-space-16)] rounded-[var(--ikh-radius-sm)] border border-[var(--ikh-grey-200)] p-[11px]">
+<div className="flex gap-[var(--ikh-space-16)] rounded-[var(--ikh-radius-md)] border border-[var(--ikh-grey-200)] p-[11px]">
   <div className="flex w-[100px] flex-col gap-1 pt-2">
     <SkeletonBlock className="h-6 w-[84px]" />
     <SkeletonBlock className="h-9 w-[84px]" />
@@ -260,7 +406,7 @@ function SkeletonBlock({ className }: { className?: string }) {
 
 ```dart
 class SkeletonBox extends StatelessWidget {
-  const SkeletonBox({super.key, required this.width, required this.height, this.borderRadius = 4});
+  const SkeletonBox({super.key, required this.width, required this.height, this.borderRadius = 6});
 
   final double width;
   final double height;
@@ -272,7 +418,7 @@ class SkeletonBox extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: IkhlasColors.grey200.withOpacity(0.5),
+        color: IkhlasColors.grey200.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(borderRadius),
       ),
     );
@@ -318,8 +464,8 @@ Column(
     SizedBox(height: IkhlasSpacing.space4),
     Text('Port Dickson', style: IkhlasTypography.body.copyWith(color: IkhlasColors.grey700)),
     Text('5 October 2025 • 13 Rabi\' Al-Thani 1447 H', style: IkhlasTypography.body.copyWith(color: IkhlasColors.grey700)),
-    SizedBox(height: IkhlasSpacing.space8),
-    ButtonLink(label: 'Change location', onTap: () {}),
+    SizedBox(height: IkhlasSpacing.space4),
+    ButtonLink(label: 'Change location', onTap: () {}), // 14px Medium Primary Teal + chevron
   ],
 )
 ```

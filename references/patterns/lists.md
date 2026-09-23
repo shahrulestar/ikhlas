@@ -21,12 +21,37 @@ ListView.separated(
 )
 ```
 
-## Settings / menu list
+## Settings group (grouped list card)
 
-From Issues page stickies (IKHLAS UI enhancements):
-- List item horizontal padding: **space16**
-- Corner radius on grouped items: **12px**
-- Separator between items: Grey 200 border or 1px line
+Used on Account, Settings, Prayer Time Settings and Notifications screens.
+
+| Property | Value |
+|----------|-------|
+| Card | White, 1px Grey 200 border, radius 12, padding 16 |
+| Group gap | 16 between cards |
+| Group label | 14px Sub Body, Grey 600 (e.g. "Account details", "Settings", "General") |
+| Row | 16px Body, Black; min height 48; horizontal padding 16 |
+| Trailing | Chevron 24 (navigation), toggle, radio (22px) or tick icon |
+| Separator | 1px Grey 200 between rows; none after the last row |
+
+Older frames show radius 4 and 18px padding — legacy ([legacy-migration.md](../legacy-migration.md)).
+
+### Row trailing controls
+
+| Control | Spec |
+|---------|------|
+| Toggle on | Track Primary Teal family, white knob |
+| Toggle off / disabled | Track grey at 16% (`#787880`), knob white; row label turns Grey 600 when disabled |
+| Radio / select | 22px circle outline `#787880` at 16%; selected = Teal Link Alt `#169D9A` filled tick |
+| Chevron | 24px, Grey 600 |
+
+When a permission is blocked, place an error notice at the top of the group and fade the dependent rows ([patterns/states.md](states.md#permission-denied)).
+
+## Account header card
+
+- Avatar 70 (circle, initials 22 Regular white on a colour fill) + name 16 Medium
+- Loyalty strip: Loyalty Surface `#E9F9FA`, 3 columns (points, member ID, tier), labels 12 Grey 600 / values 12 Black
+- "Powered by" caption 12 Grey 600 + partner logo
 
 ## Link row (button variant)
 
@@ -35,9 +60,28 @@ Text + chevron, full width row:
 - Trailing icon: 24px
 - Gap: space8
 
+## prayer_time_heading (component_set)
+
+| State | Line 1 | Line 2 | Action |
+|-------|--------|--------|--------|
+| located | "Today, 15 Nov 2023" H3 Black | "Prayer times in Kuala Lumpur" 16 Grey 700 | "Change location" button_link |
+| locating | same | "Locating..." 16 Grey 700 | same |
+| location_outdated | same | "Location outdated" 16 Red `#DC3224` | same |
+
+Layout: column, gap 4, left padding 16; a 24px refresh icon may sit at the trailing edge.
+
+## Inbox / message rows
+
+| Variant | Title | Preview | Time |
+|---------|-------|---------|------|
+| new (unread) | 16 SemiBold Black | 14 Regular Black | 12 SemiBold Black |
+| default (read) | 16 Regular Black | 14 Regular Grey 90 | 12 Regular Black |
+
+Unread rows may sit on a tinted band; unread counts use a red badge ([tabs.md](../components/tabs.md)).
+
 ## icon + label grid
 
 Home quick actions:
-- 4 columns on mobile (~60px wide cells)
-- Vertical: icon + caption label
-- Row gap between cells: ~30px (layout-specific)
+- 4 tiles, 60px wide each, gap 30 (container 334)
+- Vertical: 46px icon + 14px label, gap 8
+- Spec: [navigation.md](../components/navigation.md#icon--label-component_set)

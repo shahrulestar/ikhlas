@@ -1,32 +1,41 @@
 # Form Patterns
 
-No dedicated `input` component documented yet. Spec below is inferred from design system tokens.
+Field component specs (text field, floating label, phone, password, stepper, checkbox, radio): [components/text-field.md](../components/text-field.md).
 
-## Inferred from design system tokens
+## Form layout
 
-| Element | Token |
+| Element | Value |
 |---------|-------|
-| Field label | 14px Sub Body Medium, Black |
-| Field text | 16px Body, Black |
-| Placeholder | Grey 700 |
-| Border | Grey 200, 1px |
-| Focus border | Primary Teal |
-| Field padding | space12 vertical, space16 horizontal |
-| Field radius | 8px or 12px — verify against design reference |
-| Error text | 12px Caption, Red |
-| Error border | Red |
+| Section title | H3 20 Medium Black |
+| Section description | 16 Regular Grey 90 `#4C4C50`, gap 4 below title |
+| Title block → fields | 16 |
+| Between fields | 16 |
+| Between sections | 40 |
+| Screen margin | 16 |
+
+Example sections (checkout): "Registration details", "Participant details", "Additional notes", "Akad".
 
 ## Primary submit
 
-Use Primary CTA button spec from [components/buttons.md](../components/buttons.md):
-- Dark Teal fill, white text, 12px radius
-
-## Info helper
-
-Place `info` banner above form sections when contextual help is needed (see [components/feedback.md](../components/feedback.md)).
+- Primary button from [components/buttons.md](../components/buttons.md): Primary Teal `#007F7C`, white text, radius 12, height 48, full width in a sticky footer
+- **Disabled (Grey 300) until every required field is valid**
+- Stays pinned above the keyboard while typing
+- While submitting: spinner overlay over the whole screen ([patterns/states.md](states.md#loading))
+- After success: top toast ("Profile updated") or navigate to a success screen
 
 ## Validation
 
-When implementing forms:
-1. Check the design reference for input component specs
-2. Update this file once input component tokens are confirmed
+| Moment | Behaviour |
+|--------|-----------|
+| On blur / submit | Show error border Red `#DC3224` + error message 12px Red below the field |
+| Label | Turns Red while the field is in error |
+| Fix | Error clears as soon as the value becomes valid |
+| Server error | Error dialog "Oops! Something went wrong" with Cancel / Try Again ([components/overlays.md](../components/overlays.md)) |
+
+## Info helper
+
+Place an information notice above or inside a form section when contextual help is needed ([components/feedback.md](../components/feedback.md)).
+
+## Read-only / locked fields
+
+Fields managed by SSO (e.g. email on the airasia account) use the disabled field style plus a warning notice explaining where to change them.

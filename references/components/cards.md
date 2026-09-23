@@ -2,21 +2,29 @@
 
 ## action_card (component_set)
 
-**componentKey:** `f2cd1e11e5a97353961dbaf8d31897bb90f69d9b`  
-**Reference node:** `1256:22296`
+Property `type` = primary | secondary | check_status (+ deprecated old_teal, old_gold).
 
-### Spec
+### Shared spec
 
 | Property | Value |
 |----------|-------|
-| Background | Teal Surface `#F0F9F9` |
+| Width | 358 (full content width) |
 | Padding | space16 (all sides) |
 | Radius | 12px (IKHLAS-3640) |
-| Layout | Row: 46px icon + text column |
-| Text gap | space8 between title block and button_link |
-| Title | 16px Medium, Black, line-height 24px |
-| Body | 14px Regular, Grey 800, line-height 21px |
-| Action | button_link: 14px Medium Primary Teal |
+| Layout | Row: 46px icon + text column, gap space16 |
+| Text gap | space4 title → body; space8 text block → button_link |
+
+### Types
+
+| Type | Background | Title | Body | Action |
+|------|-----------|-------|------|--------|
+| primary | Teal Surface `#F0F9F9` | 16px Medium Black | 14px Regular Grey 800 | button_link 14px Medium Primary Teal |
+| secondary | Gold Surface `#FAF8F2` (icon bg `#F4F0E5`) | 20px Medium Black | 16px Regular Grey 800 | 16px Medium Gold Link `#956B00` |
+| check_status | Grey 50 `#F9F9F9`, radius 4 | 20px Medium Black | 16px Regular Grey 90 | 16px Medium Black + chevron ("Click here to check status") |
+| old_teal (deprecated) | `#00B2A9` at 10% | 16px Medium | 14px Grey 800 | 16px `#169D9A` → use primary |
+| old_gold (deprecated) | `#FAF8F2` | 20px Medium | 16px Grey 800 | 16px `#D7B250` → use secondary |
+
+Typical copy: "Enjoy using the IKHLAS app? / Rate now", "Looking for assistance? / Contact now", "Explore qurban packages / Explore now".
 
 ### Flutter widget name
 
@@ -30,33 +38,24 @@
 
 ## user_greeting_card (component_set)
 
-**componentKey:** `ec77f9e08a0de2dd3907286601e708fafb1a14`  
-**Reference node:** `1256:22082`
+Property `userType` = guest | registered (+ deprecated old_guest, old_registered).
 
 ### Spec
 
 | Property | Value |
 |----------|-------|
+| Width | 318 (leaves room for a 24px refresh icon) |
 | Layout | Column, gap space4 |
-| Greeting | H3 20px Medium, Black |
-| Location/dates | 16px Body, Grey 700 |
-| Action | button_link 16px Medium, `#169D9A` + 24px icon |
+| Greeting | H3 20px Medium, Black — guest "Assalamualaikum", registered "Assalamualaikum {Name}" |
+| Location/dates | 16px Body, Grey 700 — two lines: city, then "7 January 2025 • 7 Rajab 1446 H" |
+| Action | button_link primary: "Change location" 14px Medium Primary Teal + chevron |
 
-Supports dual date lines (Gregorian • Hijri).
-
----
-
-## Content cards (product)
-
-Horizontal scroll card grids use:
-- Card width ~160px (mobile) or ~244px (web)
-- Gap between cards: space16 (260 - 244 = 16) or space24 on web
-- Image fill with optional title below
-
-Not separate component_sets — compose from layout tokens + image component.
+Deprecated old_* variants use 16px `#00B2A9` for the action — replace with button_link primary.
 
 ---
 
-## promo_intro_card
+## Content cards
 
-Used in web travel grid. Tall portrait cards (~418px height). See WIP Customer App file for instances.
+Product cards, banner slider, USP tiles, info chips and event cards: [product-card.md](product-card.md).
+
+Activity detail key-value cards: [activity-detail.md](activity-detail.md).
