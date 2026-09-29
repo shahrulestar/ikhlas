@@ -32,6 +32,7 @@ Task Progress:
 | Product landing | [layout.md#product-landing-page-qurban-aqiqah-zakat-sadaqah](references/layout.md#product-landing-page-qurban-aqiqah-zakat-sadaqah) | USP grid, secondary button, action_card check_status, product card grid, bottom sheet "Help?" |
 | Detail (event / article) | [layout.md#detail-page-2026-pattern](references/layout.md#detail-page-2026-pattern) | teal navbar + content sheet, event card, info chips, primary button |
 | Checkout | [layout.md#checkout](references/layout.md#checkout) | item summary card, text fields, stepper, notice, checkboxes, sticky footer |
+| Zakat checkout + calculator | [layout.md#zakat-checkout--calculator](references/layout.md#zakat-checkout--calculator) | checkout form (no top nav), secondary "Calculate your zakat" under Year, type from checkout dropdown only, right sheet 560–720px (desktop) / bottom sheet (mobile), stacked form + result card |
 | Settings / Account | [layout.md#settings--account](references/layout.md#settings--account) | account header card, settings groups, tertiary "Log out" |
 | Activity | [layout.md#activity-listing](references/layout.md#activity-listing) | secondary tab strip, activity detail cards, promotional empty state |
 
@@ -61,6 +62,8 @@ Audit Progress:
 - [ ] No 10px values (remap to space8 or space12)
 - [ ] Layout rhythm: 16 screen margin, 40 between sections, 60 before "End of the section"
 - [ ] Scrolling screens end with the "End of the section" footer
+- [ ] Web: responsive at 390 / 768 / 1024 / 1440 — grid 4 / 8 / 12 col, content capped at 1024, no stretched cards or forms
+- [ ] Web: mobile header 56, carousels → grids from 768, bottom sheets → dialogs from 768
 - [ ] Colors match semantic tokens in references/colors.md (Grey 50 = #F9F9F9)
 - [ ] Typography uses DM Sans with correct style (H1–H4, Body, Sub Body, Caption)
 - [ ] Button, card, notice, dialog and sheet radius = 12px; text field 4px

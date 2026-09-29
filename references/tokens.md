@@ -96,6 +96,11 @@ Font family: **DM Sans** → `IkhlasTypography.fontFamily` / `--ikh-font`
 | Before "End of the section" | 60px (space60) | [layout.md](layout.md) |
 | Navbar (status bar + header) | 44 + 48 = 92px | [layout.md](layout.md) |
 | Bottom nav + home indicator | 50 + 34 = 84px | [layout.md](layout.md) |
+| Breakpoint tablet | 768px (8 col, gutter 16, margin 16) | [layout.md](layout.md#responsive-layout) |
+| Breakpoint desktop | 1024px (12 col, gutter 24, container 1024) | [layout.md](layout.md#responsive-layout) |
+| Breakpoint wide | 1440px (banners 1248) | [layout.md](layout.md#responsive-layout) |
+| Section gap desktop | 60px (space60) | [layout.md](layout.md#responsive-layout) |
+| Mobile web header | 56px | [layout.md](layout.md#shell-per-breakpoint) |
 
 ## Resolution quick reference
 

@@ -85,45 +85,113 @@ No app codebase is required to use this skill. All token values and component sp
 
 ## Installation
 
-Clone the repo to a location your agent can read. The exact path depends on your agent setup.
+The skill ships on the `main` branch only — design docs, tokens, and component references. No app codebase required.
 
-### Option A — Standalone clone
-
-```bash
-git clone https://github.com/shahrulestar/ikhlas.git
-```
-
-Point your agent at the repo root (or at `SKILL.md`) when starting a session.
-
-### Option B — Project-local skill
-
-Add inside a project so the whole team shares the same version:
+### Quick install (Cursor — recommended)
 
 ```bash
-git submodule add https://github.com/shahrulestar/ikhlas.git skills/ikhlas-app-ui
+git clone git@github.com:shahrulestar2/ikhlas.git ~/.cursor/skills/ikhlas-app-ui
 ```
 
-Or copy the folder:
+Or run the install script after cloning this repo:
 
 ```bash
-git clone https://github.com/shahrulestar/ikhlas.git skills/ikhlas-app-ui
+bash scripts/install.sh
 ```
 
-### Option C — Agent skills directory
-
-If your agent runtime supports a skills/plugins folder, clone or symlink there:
+HTTPS alternative:
 
 ```bash
-git clone https://github.com/shahrulestar/ikhlas.git /path/to/your/agent/skills/ikhlas-app-ui
+git clone https://github.com/shahrulestar2/ikhlas.git ~/.cursor/skills/ikhlas-app-ui
 ```
-
-Replace `/path/to/your/agent/skills/` with whatever your tool expects (e.g. a personal skills directory, project `.agents/skills/`, or a custom config path).
-
-### Option D — Manual context
-
-For agents without skill discovery, attach or paste `SKILL.md` at the start of a session, then pull in reference files as needed.
 
 After install, start a **new agent session** so the skill is loaded fresh.
+
+### Cursor skill locations
+
+| Type | Path | Scope |
+|------|------|-------|
+| Personal | `~/.cursor/skills/ikhlas-app-ui/` | All projects (developers and designers) |
+| Project | `.cursor/skills/ikhlas-app-ui/` | Everyone who clones the app repo |
+
+Do **not** install to `~/.cursor/skills-cursor/` — that directory is reserved for Cursor built-in skills.
+
+**Project install (submodule):**
+
+```bash
+bash scripts/install-project.sh
+# or manually:
+git submodule add git@github.com:shahrulestar2/ikhlas.git .cursor/skills/ikhlas-app-ui
+```
+
+Team members after clone:
+
+```bash
+git submodule update --init --recursive
+```
+
+**Symlink (local development):**
+
+```bash
+ln -s /path/to/ikhlas ~/.cursor/skills/ikhlas-app-ui
+```
+
+### Other AI agents
+
+| Agent | Install path |
+|-------|--------------|
+| Claude Code / CLI | `.claude/skills/ikhlas-app-ui/` or path in agent config |
+| Generic agent | Point at repo root or `SKILL.md` |
+| No skill discovery | Attach `SKILL.md` at session start; pull reference files as needed |
+
+Clone command is the same — only the destination folder changes:
+
+```bash
+git clone git@github.com:shahrulestar2/ikhlas.git /path/to/your/agent/skills/ikhlas-app-ui
+```
+
+### Manual file upload (no git)
+
+1. Download ZIP from GitHub (`Code → Download ZIP`) on the **`main`** branch
+2. Extract to your agent skills folder (e.g. `~/.cursor/skills/ikhlas-app-ui/`)
+3. Confirm `SKILL.md` is at the folder root and `references/` is intact
+4. Start a new agent session
+
+**Minimum files for a short session:** `SKILL.md` plus the references you need (e.g. `references/layout.md`, `references/components/buttons.md`).
+
+### Update and uninstall
+
+```bash
+# Update personal install
+git -C ~/.cursor/skills/ikhlas-app-ui pull
+
+# Uninstall
+rm -rf ~/.cursor/skills/ikhlas-app-ui
+```
+
+If the remote URL changed:
+
+```bash
+git -C ~/.cursor/skills/ikhlas-app-ui remote set-url origin git@github.com:shahrulestar2/ikhlas.git
+```
+
+### Verify install
+
+- [ ] Folder contains `SKILL.md` at the root
+- [ ] `references/tokens.md` exists
+- [ ] New agent session started
+- [ ] Test prompt: `Use the ikhlas-app-ui skill to audit this button`
+
+### Prototypes (optional)
+
+HTML zakat prototypes are **not** part of the skill install. They live on the separate `prototypes` branch:
+
+```bash
+git clone -b prototypes git@github.com:shahrulestar2/ikhlas.git ikhlas-prototypes
+cd ikhlas-prototypes/prototypes && python3 -m http.server 8765
+```
+
+Use prototypes for visual reference only — implement screens from `references/` and `playbook.md`.
 
 ---
 
@@ -254,6 +322,9 @@ ikhlas/
 ├── SKILL.md                  ← Main agent entry point
 ├── design.md                 ← Brand principles, do/don't, accessibility
 ├── playbook.md               ← Implement screen, UI audit, token refresh
+├── scripts/
+│   ├── install.sh            ← Personal skill install (Cursor)
+│   └── install-project.sh    ← Project submodule install
 ├── examples/
 │   └── implementations.md    ← Before/after design → code samples
 └── references/
@@ -296,5 +367,5 @@ Token values and component specs in this repo should stay in sync with the live 
 
 ## Links
 
-- **GitHub:** https://github.com/shahrulestar/ikhlas
+- **GitHub:** https://github.com/shahrulestar2/ikhlas
 - **IKHLAS:** https://ikhlas.com

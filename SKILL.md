@@ -48,6 +48,8 @@ Load when the user mentions:
 
 ## Quick start
 
+Installation: see [README.md#installation](README.md#installation).
+
 1. Identify platform: **Flutter** → [references/flutter.md](references/flutter.md); **Next.js** → [references/nextjs.md](references/nextjs.md)
 2. Resolve tokens from [references/tokens.md](references/tokens.md) — never use magic numbers
 3. Pick the screen recipe in [references/layout.md](references/layout.md) (Home, landing, detail, checkout, settings, activity)
@@ -63,6 +65,7 @@ Load when the user mentions:
 3. **Typography:** DM Sans only (Arabic Text for Quran content). Use named text styles (H1–H4, Body, Sub Body, Caption). See [references/typography.md](references/typography.md).
 4. **Radius:** Buttons, cards, notices, dialogs and sheets use **12px** (IKHLAS-3640); text fields 4px; chips 24px. See [references/radius-shadows.md](references/radius-shadows.md).
 5. **Elevation:** No shadows — flat fills, 1px Grey 200 borders, 50% black overlay for modals.
+6. **Responsive:** Mobile-first. Mobile 4 col / tablet 8 col (≥768) / desktop 12 col with 1024 container (≥1024). Carousels become grids and bottom sheets become dialogs from tablet up; cap widths instead of stretching. See [references/layout.md](references/layout.md#responsive-layout).
 6. **Platform mapping:** Every token has Flutter + Next.js equivalents in [references/tokens.md](references/tokens.md).
 
 ## IDS wins over legacy screens

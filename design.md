@@ -22,11 +22,15 @@ IKHLAS is an Islamic fintech and travel platform (Umrah, Zakat, Sadaqah, travel 
 
 Mobile (Flutter) and web (Next.js) share the same tokens. Differences are layout-only:
 
-| Aspect | Mobile | Web |
-|--------|--------|-----|
-| Touch targets | Min 44px height for primary actions | Hover states on links/buttons |
-| Navigation | Bottom tab bar, app header | Sticky web header, mega-menu |
-| Content width | Full-bleed with 16px screen padding | 1024px content column (1248px wide banners) |
+| Aspect | Mobile app | Mobile web | Desktop web |
+|--------|-----------|------------|-------------|
+| Grid | 4 col, 16 gutter, 16 margin | 4 col, 16 / 16 | 12 col, 24 gutter, 1024 container |
+| Touch targets | Min 44px for actions | Min 44px | Hover + focus states on links/buttons |
+| Navigation | Bottom tab bar, 92 navbar | 56 sticky header + drawer | 66 sticky header, inline menu |
+| Content width | Full-bleed, 16 padding | Full-bleed, 16 padding | 1024 column (1248 banners), capped cards and forms |
+| Carousels | Horizontal scroll | Horizontal scroll | Grids |
+
+Tablet (768–1023) uses an 8-column grid. Full reflow and compact rules: [references/layout.md](references/layout.md#responsive-layout).
 
 ## Do
 
