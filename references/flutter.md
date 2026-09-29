@@ -131,10 +131,17 @@ LayoutBuilder(builder: (context, constraints) {
       ),
     );
   }
-  return GridView.count(
-    crossAxisCount: bp == IkhlasBreakpoint.tablet ? 4 : 5,
-    mainAxisSpacing: IkhlasSpacing.space16,
-    crossAxisSpacing: IkhlasSpacing.space16,
+  final gap = bp == IkhlasBreakpoint.desktop
+      ? IkhlasSpacing.space24
+      : IkhlasSpacing.space16;
+  return GridView(
+    padding: const EdgeInsets.symmetric(horizontal: IkhlasSpacing.space16),
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: bp == IkhlasBreakpoint.tablet ? 4 : 5,
+      mainAxisSpacing: gap,
+      crossAxisSpacing: gap,
+      mainAxisExtent: 290,
+    ),
     shrinkWrap: true,
     physics: const NeverScrollableScrollPhysics(),
     children: [for (final p in products) ProductCard(product: p)],
