@@ -48,7 +48,7 @@ Load when the user mentions:
 
 ## Quick start
 
-Installation: see [README.md#installation](README.md#installation).
+Installation: see [README.md#installation](README.md#installation). This is a Markdown-only skill package — no scripts or runtime required.
 
 1. Identify platform: **Flutter** → [references/flutter.md](references/flutter.md); **Next.js** → [references/nextjs.md](references/nextjs.md)
 2. Resolve tokens from [references/tokens.md](references/tokens.md) — never use magic numbers

@@ -1,12 +1,14 @@
 # IKHLAS App UI — AI Agent Skill
 
-A structured skill package for AI coding agents working on the **IKHLAS App UI** design system. It teaches agents how to implement IKHLAS screens consistently across **Flutter (mobile)** and **Next.js (web)** using shared design tokens, component specs, and platform guides.
+A **Markdown-only** skill package for AI coding agents working on the **IKHLAS App UI** design system. It teaches agents how to implement IKHLAS screens consistently across **Flutter (mobile)** and **Next.js (web)** using shared design tokens, component specs, and platform guides.
 
 ---
 
 ## What this repo is
 
-This repository is the **canonical, version-controlled copy** of the `ikhlas-app-ui` agent skill. It is not tied to a single IDE or agent product — any AI agent that can load markdown instructions and reference files can use it.
+This repository is the **canonical, version-controlled copy** of the `ikhlas-app-ui` agent skill — a **100% Markdown package** (`SKILL.md` + reference `.md` files). No scripts, no runtime, no dependencies.
+
+Works with **Cursor**, **Claude Code**, or any agent that can read Markdown instructions and reference files.
 
 | File / folder | Purpose |
 |---------------|---------|
@@ -16,7 +18,7 @@ This repository is the **canonical, version-controlled copy** of the `ikhlas-app
 | [references/](references/) | Tokens, colors, typography, platform guides, components |
 | [examples/](examples/) | Before/after design export → code samples |
 
-No app codebase is required to use this skill. All token values and component specs are documented in the reference files.
+No app codebase is required. Install by cloning the repo or uploading the Markdown files manually.
 
 ---
 
@@ -85,29 +87,21 @@ No app codebase is required to use this skill. All token values and component sp
 
 ## Installation
 
-The skill ships on the `main` branch only — design docs, tokens, and component references. No app codebase required.
+The skill ships on the `main` branch only — Markdown docs, tokens, and component references. Three ways to install:
 
-### Quick install (Cursor — recommended)
+### 1. Terminal — personal install (Cursor, recommended)
 
-```bash
+Copy-paste into your terminal:
+
+```text
 git clone git@github.com:shahrulestar2/ikhlas.git ~/.cursor/skills/ikhlas-app-ui
-```
-
-Or run the install script after cloning this repo:
-
-```bash
-bash scripts/install.sh
 ```
 
 HTTPS alternative:
 
-```bash
+```text
 git clone https://github.com/shahrulestar2/ikhlas.git ~/.cursor/skills/ikhlas-app-ui
 ```
-
-After install, start a **new agent session** so the skill is loaded fresh.
-
-### Cursor skill locations
 
 | Type | Path | Scope |
 |------|------|-------|
@@ -116,25 +110,34 @@ After install, start a **new agent session** so the skill is loaded fresh.
 
 Do **not** install to `~/.cursor/skills-cursor/` — that directory is reserved for Cursor built-in skills.
 
-**Project install (submodule):**
+**Symlink (local development):**
 
-```bash
-bash scripts/install-project.sh
-# or manually:
+```text
+ln -s /path/to/ikhlas ~/.cursor/skills/ikhlas-app-ui
+```
+
+### 2. Terminal — project install (submodule)
+
+From your app repo root:
+
+```text
 git submodule add git@github.com:shahrulestar2/ikhlas.git .cursor/skills/ikhlas-app-ui
 ```
 
 Team members after clone:
 
-```bash
+```text
 git submodule update --init --recursive
 ```
 
-**Symlink (local development):**
+### 3. Manual file upload (no git)
 
-```bash
-ln -s /path/to/ikhlas ~/.cursor/skills/ikhlas-app-ui
-```
+1. Download ZIP from GitHub (`Code → Download ZIP`) on the **`main`** branch
+2. Extract to your agent skills folder (e.g. `~/.cursor/skills/ikhlas-app-ui/`)
+3. Confirm `SKILL.md` is at the folder root and `references/` is intact
+4. Start a new agent session
+
+**Minimum files for a short session:** `SKILL.md` plus the references you need (e.g. `references/layout.md`, `references/components/buttons.md`).
 
 ### Other AI agents
 
@@ -144,34 +147,22 @@ ln -s /path/to/ikhlas ~/.cursor/skills/ikhlas-app-ui
 | Generic agent | Point at repo root or `SKILL.md` |
 | No skill discovery | Attach `SKILL.md` at session start; pull reference files as needed |
 
-Clone command is the same — only the destination folder changes:
+Clone to any agent skills folder:
 
-```bash
+```text
 git clone git@github.com:shahrulestar2/ikhlas.git /path/to/your/agent/skills/ikhlas-app-ui
 ```
 
-### Manual file upload (no git)
-
-1. Download ZIP from GitHub (`Code → Download ZIP`) on the **`main`** branch
-2. Extract to your agent skills folder (e.g. `~/.cursor/skills/ikhlas-app-ui/`)
-3. Confirm `SKILL.md` is at the folder root and `references/` is intact
-4. Start a new agent session
-
-**Minimum files for a short session:** `SKILL.md` plus the references you need (e.g. `references/layout.md`, `references/components/buttons.md`).
-
 ### Update and uninstall
 
-```bash
-# Update personal install
+```text
 git -C ~/.cursor/skills/ikhlas-app-ui pull
-
-# Uninstall
 rm -rf ~/.cursor/skills/ikhlas-app-ui
 ```
 
 If the remote URL changed:
 
-```bash
+```text
 git -C ~/.cursor/skills/ikhlas-app-ui remote set-url origin git@github.com:shahrulestar2/ikhlas.git
 ```
 
@@ -182,11 +173,13 @@ git -C ~/.cursor/skills/ikhlas-app-ui remote set-url origin git@github.com:shahr
 - [ ] New agent session started
 - [ ] Test prompt: `Use the ikhlas-app-ui skill to audit this button`
 
+After install, start a **new agent session** so the skill is loaded fresh.
+
 ### Prototypes (optional)
 
 HTML zakat prototypes are **not** part of the skill install. They live on the separate `prototypes` branch:
 
-```bash
+```text
 git clone -b prototypes git@github.com:shahrulestar2/ikhlas.git ikhlas-prototypes
 cd ikhlas-prototypes/prototypes && python3 -m http.server 8765
 ```
@@ -322,9 +315,6 @@ ikhlas/
 ├── SKILL.md                  ← Main agent entry point
 ├── design.md                 ← Brand principles, do/don't, accessibility
 ├── playbook.md               ← Implement screen, UI audit, token refresh
-├── scripts/
-│   ├── install.sh            ← Personal skill install (Cursor)
-│   └── install-project.sh    ← Project submodule install
 ├── examples/
 │   └── implementations.md    ← Before/after design → code samples
 └── references/
