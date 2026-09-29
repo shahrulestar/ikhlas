@@ -21,6 +21,8 @@
 
 ## Semantic spacing (layout rules)
 
+Values below are mobile. Desktop steps up (gutter 24, section gap 60) — see [layout.md](layout.md#spacing-per-breakpoint).
+
 | Context | Token |
 |---------|-------|
 | Screen margin left/right (mobile) | space16 |

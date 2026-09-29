@@ -1,12 +1,14 @@
 # IKHLAS App UI — AI Agent Skill
 
-A structured skill package for AI coding agents working on the **IKHLAS App UI** design system. It teaches agents how to implement IKHLAS screens consistently across **Flutter (mobile)** and **Next.js (web)** using shared design tokens, component specs, and platform guides.
+A **Markdown-only** skill package for AI coding agents working on the **IKHLAS App UI** design system. It teaches agents how to implement IKHLAS screens consistently across **Flutter (mobile)** and **Next.js (web)** using shared design tokens, component specs, and platform guides.
 
 ---
 
 ## What this repo is
 
-This repository is the **canonical, version-controlled copy** of the `ikhlas-app-ui` agent skill. It is not tied to a single IDE or agent product — any AI agent that can load markdown instructions and reference files can use it.
+This repository is the **canonical, version-controlled copy** of the `ikhlas-app-ui` agent skill — a **100% Markdown package** (`SKILL.md` + reference `.md` files). No scripts, no runtime, no dependencies.
+
+Works with **Cursor**, **Claude Code**, or any agent that can read Markdown instructions and reference files.
 
 | File / folder | Purpose |
 |---------------|---------|
@@ -16,7 +18,7 @@ This repository is the **canonical, version-controlled copy** of the `ikhlas-app
 | [references/](references/) | Tokens, colors, typography, platform guides, components |
 | [examples/](examples/) | Before/after design export → code samples |
 
-No app codebase is required to use this skill. All token values and component specs are documented in the reference files.
+No app codebase is required. Install by cloning the repo or uploading the Markdown files manually.
 
 ---
 
@@ -85,45 +87,104 @@ No app codebase is required to use this skill. All token values and component sp
 
 ## Installation
 
-Clone the repo to a location your agent can read. The exact path depends on your agent setup.
+The skill ships on the `main` branch only — Markdown docs, tokens, and component references. Three ways to install:
 
-### Option A — Standalone clone
+### 1. Terminal — personal install (Cursor, recommended)
 
-```bash
-git clone https://github.com/shahrulestar/ikhlas.git
+Copy-paste into your terminal:
+
+```text
+git clone git@github.com:shahrulestar2/ikhlas.git ~/.cursor/skills/ikhlas-app-ui
 ```
 
-Point your agent at the repo root (or at `SKILL.md`) when starting a session.
+HTTPS alternative:
 
-### Option B — Project-local skill
-
-Add inside a project so the whole team shares the same version:
-
-```bash
-git submodule add https://github.com/shahrulestar/ikhlas.git skills/ikhlas-app-ui
+```text
+git clone https://github.com/shahrulestar2/ikhlas.git ~/.cursor/skills/ikhlas-app-ui
 ```
 
-Or copy the folder:
+| Type | Path | Scope |
+|------|------|-------|
+| Personal | `~/.cursor/skills/ikhlas-app-ui/` | All projects (developers and designers) |
+| Project | `.cursor/skills/ikhlas-app-ui/` | Everyone who clones the app repo |
 
-```bash
-git clone https://github.com/shahrulestar/ikhlas.git skills/ikhlas-app-ui
+Do **not** install to `~/.cursor/skills-cursor/` — that directory is reserved for Cursor built-in skills.
+
+**Symlink (local development):**
+
+```text
+ln -s /path/to/ikhlas ~/.cursor/skills/ikhlas-app-ui
 ```
 
-### Option C — Agent skills directory
+### 2. Terminal — project install (submodule)
 
-If your agent runtime supports a skills/plugins folder, clone or symlink there:
+From your app repo root:
 
-```bash
-git clone https://github.com/shahrulestar/ikhlas.git /path/to/your/agent/skills/ikhlas-app-ui
+```text
+git submodule add git@github.com:shahrulestar2/ikhlas.git .cursor/skills/ikhlas-app-ui
 ```
 
-Replace `/path/to/your/agent/skills/` with whatever your tool expects (e.g. a personal skills directory, project `.agents/skills/`, or a custom config path).
+Team members after clone:
 
-### Option D — Manual context
+```text
+git submodule update --init --recursive
+```
 
-For agents without skill discovery, attach or paste `SKILL.md` at the start of a session, then pull in reference files as needed.
+### 3. Manual file upload (no git)
+
+1. Download ZIP from GitHub (`Code → Download ZIP`) on the **`main`** branch
+2. Extract to your agent skills folder (e.g. `~/.cursor/skills/ikhlas-app-ui/`)
+3. Confirm `SKILL.md` is at the folder root and `references/` is intact
+4. Start a new agent session
+
+**Minimum files for a short session:** `SKILL.md` plus the references you need (e.g. `references/layout.md`, `references/components/buttons.md`).
+
+### Other AI agents
+
+| Agent | Install path |
+|-------|--------------|
+| Claude Code / CLI | `.claude/skills/ikhlas-app-ui/` or path in agent config |
+| Generic agent | Point at repo root or `SKILL.md` |
+| No skill discovery | Attach `SKILL.md` at session start; pull reference files as needed |
+
+Clone to any agent skills folder:
+
+```text
+git clone git@github.com:shahrulestar2/ikhlas.git /path/to/your/agent/skills/ikhlas-app-ui
+```
+
+### Update and uninstall
+
+```text
+git -C ~/.cursor/skills/ikhlas-app-ui pull
+rm -rf ~/.cursor/skills/ikhlas-app-ui
+```
+
+If the remote URL changed:
+
+```text
+git -C ~/.cursor/skills/ikhlas-app-ui remote set-url origin git@github.com:shahrulestar2/ikhlas.git
+```
+
+### Verify install
+
+- [ ] Folder contains `SKILL.md` at the root
+- [ ] `references/tokens.md` exists
+- [ ] New agent session started
+- [ ] Test prompt: `Use the ikhlas-app-ui skill to audit this button`
 
 After install, start a **new agent session** so the skill is loaded fresh.
+
+### Prototypes (optional)
+
+HTML zakat prototypes are **not** part of the skill install. They live on the separate `prototypes` branch:
+
+```text
+git clone -b prototypes git@github.com:shahrulestar2/ikhlas.git ikhlas-prototypes
+cd ikhlas-prototypes/prototypes && python3 -m http.server 8765
+```
+
+Use prototypes for visual reference only — implement screens from `references/` and `playbook.md`.
 
 ---
 
@@ -296,5 +357,5 @@ Token values and component specs in this repo should stay in sync with the live 
 
 ## Links
 
-- **GitHub:** https://github.com/shahrulestar/ikhlas
+- **GitHub:** https://github.com/shahrulestar2/ikhlas
 - **IKHLAS:** https://ikhlas.com

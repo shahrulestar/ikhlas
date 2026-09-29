@@ -159,7 +159,9 @@ Other notice styles (error, warning, general): [components/feedback.md](componen
 
 - Prefer CSS variables over hardcoded Tailwind arbitrary values once theme is set up
 - Use RSC by default; client components only for interactivity
-- Web layout: 1440 frame, 1024px content column, 1248px wide banners, 60px section gap — see [layout.md](layout.md)
+- Mobile-first with Tailwind default breakpoints: base = mobile (4 col), `md` 768 = tablet (8 col), `lg` 1024 = desktop (12 col, 1024 container), `min-[1440px]` = wide — reflow table, compact rules and container snippets in [layout.md](layout.md#responsive-layout)
+- Mobile web header is 56px (no bottom nav); desktop header 66px with inline menu
+- Carousels become grids from `md`; bottom sheets become dialogs or side panels from `md`
 - Web buttons need a hover state (Darker Teal) and a visible focus ring
 - Follow the IDS component when an older screen differs (see [legacy-migration.md](legacy-migration.md))
 - Do not install Tailwind solely for design exports — map to project theme

@@ -2,6 +2,8 @@
 
 Bottom sheet, dialog, toast, snackbar and loading overlay. All modal surfaces sit on the overlay `rgba(0, 0, 0, 0.5)` with no shadow. Motion: [motion.md](../motion.md).
 
+Specs below are mobile. From tablet up: bottom sheets become a centred dialog (max 480) or right side panel (400), dialogs cap at 400, toasts sit top-centre (max 400), snackbars bottom-left (max 480) — see [layout.md](../layout.md#overlays-per-breakpoint).
+
 ## Bottom sheet
 
 | Property | Value |

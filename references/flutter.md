@@ -88,6 +88,67 @@ abstract class IkhlasSpacing {
 }
 ```
 
+## Breakpoints
+
+Same thresholds as web ([layout.md](layout.md#responsive-layout)). Phones use the mobile layout; tablets and large foldables use the tablet reflow.
+
+```dart
+enum IkhlasBreakpoint { mobile, tablet, desktop }
+
+abstract class IkhlasBreakpoints {
+  static const tablet = 768.0;
+  static const desktop = 1024.0;
+  static const contentMaxWidth = 1024.0;
+
+  static IkhlasBreakpoint of(double width) => width >= desktop
+      ? IkhlasBreakpoint.desktop
+      : width >= tablet
+          ? IkhlasBreakpoint.tablet
+          : IkhlasBreakpoint.mobile;
+
+  static int columns(IkhlasBreakpoint bp) => switch (bp) {
+        IkhlasBreakpoint.mobile => 4,
+        IkhlasBreakpoint.tablet => 8,
+        IkhlasBreakpoint.desktop => 12,
+      };
+
+  static double sectionGap(IkhlasBreakpoint bp) =>
+      bp == IkhlasBreakpoint.desktop ? IkhlasSpacing.space60 : IkhlasSpacing.space40;
+}
+
+// Product cards: horizontal list on mobile, grid from tablet up
+LayoutBuilder(builder: (context, constraints) {
+  final bp = IkhlasBreakpoints.of(constraints.maxWidth);
+  if (bp == IkhlasBreakpoint.mobile) {
+    return SizedBox(
+      height: 290,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: IkhlasSpacing.space16),
+        itemCount: products.length,
+        separatorBuilder: (_, __) => const SizedBox(width: IkhlasSpacing.space16),
+        itemBuilder: (_, i) => ProductCard(product: products[i], width: 160),
+      ),
+    );
+  }
+  final gap = bp == IkhlasBreakpoint.desktop
+      ? IkhlasSpacing.space24
+      : IkhlasSpacing.space16;
+  return GridView(
+    padding: const EdgeInsets.symmetric(horizontal: IkhlasSpacing.space16),
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: bp == IkhlasBreakpoint.tablet ? 4 : 5,
+      mainAxisSpacing: gap,
+      crossAxisSpacing: gap,
+      mainAxisExtent: 290,
+    ),
+    shrinkWrap: true,
+    physics: const NeverScrollableScrollPhysics(),
+    children: [for (final p in products) ProductCard(product: p)],
+  );
+});
+```
+
 ## Component patterns
 
 ### action_card
