@@ -4,8 +4,10 @@ description: >-
   Implements UI using the IKHLAS App design system. Maps design tokens to Flutter
   and Next.js code, reuses IKH components, and enforces spacing, color, and
   typography rules. Use when building IKHLAS app screens (Flutter mobile or
-  Next.js web), auditing UI consistency, or when the user mentions IKHLAS, IKH,
-  IDS, or IKHLAS App UI Styles.
+  Next.js web), auditing UI consistency, generating flat-scene illustrations
+  (Dua, Dhikr, category art), or when the user mentions IKHLAS, IKH, IDS, or
+  IKHLAS App UI Styles. Load references/illustrations.md before creating or
+  extending an illustration set.
 references:
   - tokens
   - colors
@@ -32,6 +34,7 @@ references:
   - patterns/empty-states
   - patterns/lists
   - patterns/forms
+  - illustrations
 ---
 
 # IKHLAS App UI Design System
@@ -45,6 +48,7 @@ Load when the user mentions:
 - Implementing IKHLAS app screens
 - Flutter ThemeData / ThemeExtension for IKHLAS
 - Next.js / Tailwind styling for IKHLAS web
+- Flat scene illustrations, Dua or Dhikr category art, or generating more illustrations in the same style
 
 ## Quick start
 
@@ -145,9 +149,14 @@ When the design system updates:
 3. Never store design-tool URLs, file keys, node IDs or component keys in this repo — refer to components and screens by name
 4. Keep SKILL.md under 500 lines
 
+## Illustrations
+
+Before generating or adding a category illustration, load [references/illustrations.md](references/illustrations.md). Use the locked prompt, palette, motifs, and 160×220 card. Do not start a second picture style.
+
 ## Additional resources
 
 - Brand & UX principles: [design.md](design.md)
+- Flat scene illustrations: [references/illustrations.md](references/illustrations.md)
 - Task recipes: [playbook.md](playbook.md)
 - Code examples: [examples/implementations.md](examples/implementations.md)
 - Full docs index: [README.md](README.md)

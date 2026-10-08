@@ -43,6 +43,7 @@ No app codebase is required. Install by cloning the repo or uploading the Markdo
 | [references/radius-shadows.md](references/radius-shadows.md) | Radius scale (12px default), no shadows |
 | [references/motion.md](references/motion.md) | Motion defaults and overlay behaviour |
 | [references/layout.md](references/layout.md) | Screen anatomy, screen recipes, web grid, asset sizes |
+| [references/illustrations.md](references/illustrations.md) | Flat scene illustration style, palette, motifs, and prompt so new category art stays consistent |
 | [references/legacy-migration.md](references/legacy-migration.md) | Legacy → IDS map and open items with defaults |
 
 ### Platform guides
@@ -94,13 +95,13 @@ The skill ships on the `main` branch only — Markdown docs, tokens, and compone
 Copy-paste into your terminal:
 
 ```text
-git clone git@github.com:shahrulestar2/ikhlas.git ~/.cursor/skills/ikhlas-app-ui
+git clone git@github.com:shahrulestar/ikhlas.git ~/.cursor/skills/ikhlas-app-ui
 ```
 
 HTTPS alternative:
 
 ```text
-git clone https://github.com/shahrulestar2/ikhlas.git ~/.cursor/skills/ikhlas-app-ui
+git clone https://github.com/shahrulestar/ikhlas.git ~/.cursor/skills/ikhlas-app-ui
 ```
 
 | Type | Path | Scope |
@@ -121,7 +122,7 @@ ln -s /path/to/ikhlas ~/.cursor/skills/ikhlas-app-ui
 From your app repo root:
 
 ```text
-git submodule add git@github.com:shahrulestar2/ikhlas.git .cursor/skills/ikhlas-app-ui
+git submodule add git@github.com:shahrulestar/ikhlas.git .cursor/skills/ikhlas-app-ui
 ```
 
 Team members after clone:
@@ -150,7 +151,7 @@ git submodule update --init --recursive
 Clone to any agent skills folder:
 
 ```text
-git clone git@github.com:shahrulestar2/ikhlas.git /path/to/your/agent/skills/ikhlas-app-ui
+git clone git@github.com:shahrulestar/ikhlas.git /path/to/your/agent/skills/ikhlas-app-ui
 ```
 
 ### Update and uninstall
@@ -163,7 +164,7 @@ rm -rf ~/.cursor/skills/ikhlas-app-ui
 If the remote URL changed:
 
 ```text
-git -C ~/.cursor/skills/ikhlas-app-ui remote set-url origin git@github.com:shahrulestar2/ikhlas.git
+git -C ~/.cursor/skills/ikhlas-app-ui remote set-url origin git@github.com:shahrulestar/ikhlas.git
 ```
 
 ### Verify install
@@ -180,7 +181,7 @@ After install, start a **new agent session** so the skill is loaded fresh.
 HTML zakat prototypes are **not** part of the skill install. They live on the separate `prototypes` branch:
 
 ```text
-git clone -b prototypes git@github.com:shahrulestar2/ikhlas.git ikhlas-prototypes
+git clone -b prototypes git@github.com:shahrulestar/ikhlas.git ikhlas-prototypes
 cd ikhlas-prototypes/prototypes && python3 -m http.server 8765
 ```
 
@@ -357,5 +358,5 @@ Token values and component specs in this repo should stay in sync with the live 
 
 ## Links
 
-- **GitHub:** https://github.com/shahrulestar2/ikhlas
+- **GitHub:** https://github.com/shahrulestar/ikhlas
 - **IKHLAS:** https://ikhlas.com
